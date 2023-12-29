@@ -82,7 +82,7 @@
 .container .column-header nav .tab-nav {
 
     display: flex;
-    border: 2px solid black;
+    border: 1px solid black;
     border-radius: 30px;
     align-items: stretch;
     margin-left: 15px;
@@ -137,7 +137,7 @@
 
 .container .column-content .tab-content .tab-pane .card-content::-webkit-scrollbar {
     width: 20px;
-    height: 5px;
+    height: 8px;
 }
 
 .container .column-content .tab-content .tab-pane .card-content::-webkit-scrollbar-thumb {
@@ -209,11 +209,12 @@ span {
 }
  */
 
+.card-image-1 .container{
 
-.column-wrapper-2 {
-
-    height: 3000px;
-
+    background-image: url('../../public/images/puls/trending-bg-39afc2a5f77e31d469b25c187814c0a2efef225494c038098d62317d923f8415.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    
 }
 
 .column-wrapper-2 .container{
@@ -266,4 +267,128 @@ span {
     align-items: stretch;
     margin-left: 15px;
 
+}
+
+.container .column-wrapper-2-card .column-content .tab-content .tab-pane .card-content .card {
+    min-width: 300px;
+    max-width: 300px;
+    height: auto;
+}
+
+.container .column-wrapper-2-card .column-content .tab-content .tab-pane .card-content .card img {
+
+    min-width: 300px;
+    max-width: 300px;
+    height: calc(300px/1.78);
+    cursor: pointer;
+
+}
+
+.container .column-wrapper-2-card .column-content .tab-content .tab-pane .card-content .card .card-body {
+
+    padding: 10px;
+    
+}
+
+.container .column-wrapper-2-card .column-content .tab-content .tab-pane .card-content .card .card-body h2 {
+    font-size: 1.2em;
+    width: 100%;
+}
+
+.container .column-wrapper-2-card .column-content .tab-content .tab-pane .card-content .card .card-body h2 a {
+    color: #fff;
+}
+
+.container .column-wrapper-2-card .column-content .tab-content .tab-pane .card-content .card .card-body h3 {
+    font-size: 1em;
+    font-weight: 400;
+    color: #fff;
+}
+
+.container .column-wrapper-2-card .column-content {
+    padding: 20px 40px 0px 40px;
+}
+
+.container .column-wrapper-2-card .column-content .tab-content .tab-pane .card-content .card .modal-content {
+    background: unset;
+    border: unset;
+    width: 1200px;
+    height: 90vh;
+}
+
+.container .column-wrapper-2-card .column-content .tab-content .tab-pane .card-content .card .modal-dialog {
+    max-width: 1200px;
+    margin-right: 0px;
+    margin-left: 0px;
+    margin: auto;
+}
+
+.container .column-wrapper-2-card .column-content .tab-content .tab-pane .card-content .card .video-play {
+
+    position: absolute;
+    top: 34%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+
+}
+
+.inner_content {
+    height: 3000px;
+}
+
+.inner_content .container{
+    background-image: url('../../public/images/movie/card-col.jpg');
+    min-height: 300px;
+    height: calc(100vh/2.5);
+    max-height: 360px;
+    background-size: cover;
+    object-fit: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+}
+
+.inner_content .container .col-md-12 {
+
+    width: 100%;
+    height: 100%;
+    background-color: #6a40df7a;
+
+}
+
+.inner_content .container .col-md-12 .header-column {
+
+    padding-top: 30px;
+    padding-left: 75px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 2em;
+
+}
+
+.inner_content .container .col-md-12 .row .col-md-6 p {
+
+    font-size: 1.2em;
+    color: #fff;
+
+}
+
+.inner_content .container .col-md-12 .row .col-md-4 ul li {
+
+    opacity: .8;
+    color: #fff;
+
+}
+
+.inner_content .container .col-md-12 .row .col-md-6 button {
+
+    color: #fff;
+    font-size: .9em;
+    border-color: #805be7;
+    background-color: #805be7;
+    font-weight: 600;
+    font-size: .9em;
+    
 }
