@@ -1,11 +1,49 @@
 
 <script>
 
+import axios from 'axios';
+
+export default {
+    data() {
+        return {
+            populationmove: [],
+        }
+    },
+    mounted() {
+        this.population();
+    },
+    methods: {
+        population() {
+            const options = {
+                method: 'GET',
+                url: 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1',
+                headers: {
+                    accept: 'application/json',
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMjRmMTMwZDhkMWRiOGUzYTFkOGQxZTJkZGEyZmIzYyIsInN1YiI6IjY1OTRmMWZiZDdhNzBhMTM1NzY4ZjhiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.geWveJFNg7mp1mk5if-2SWEdprOb23e6SoMibi8So3I'
+                }
+            };
+
+            // Use arrow function to retain the correct 'this' context
+            axios
+                .request(options)
+                .then((response) => {
+                    this.populationmove = response.data?.results;
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+    }
+}
+
+
+
+
 </script>
 
 <template>
     <section>
-
+        <!-- {{ populationmove?.results }} -->
         <div className="container">
 
             <div className="col-12 image">
@@ -45,8 +83,9 @@
                 Trending
                 <nav>
                     <div className="tab-nav" id="nav-tab" role="tablist">
-                        <button className="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
-                            type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
+                        <button className="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                            aria-selected="true">Home</button>
                         <button className="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
                             type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
                     </div>
@@ -59,181 +98,18 @@
                         tabindex="0">
 
                         <div className="card-content ">
-                            <div className="card">
-                                <img loading="lazy" src="/images/card/29rhl1xopxA7JlGVVsf1UHfYPvN.jpg"
-                                    className="card-img-top" alt="...">
-                                <!-- <div className="chart" id="graph" data-percent="88"></div> -->
 
-                                <div className="card-body">
+                            <div v-for="movie in populationmove" class="card" :key="movie.id">
+                                <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+                                    class="card-img-top" :alt="movie.title">
+
+                                <div class="card-body">
                                     <h2>
                                         <a href="#">
-                                            The Hunger Games: The Ballad of Songbirds & Snakes
+                                            {{ movie.original_title }}
                                         </a>
                                     </h2>
-                                    <span>Dec 15, 2023</span>
-
-                                    <!-- <a href="#" className="btn btn-primary">Go somewhere</a> -->
-                                </div>
-                            </div>
-                            <div className="card">
-                                <img loading="lazy" src="/images/card/29rhl1xopxA7JlGVVsf1UHfYPvN.jpg"
-                                    className="card-img-top" alt="...">
-                                <!-- <div className="chart" id="graph" data-percent="88"></div> -->
-
-                                <div className="card-body">
-                                    <h2>
-                                        <a href="#">
-                                            The Hunger Games: The Ballad of Songbirds & Snakes
-                                        </a>
-                                    </h2>
-                                    <span>Dec 15, 2023</span>
-
-                                    <!-- <a href="#" className="btn btn-primary">Go somewhere</a> -->
-                                </div>
-                            </div>
-                            <div className="card">
-                                <img loading="lazy" src="/images/card/29rhl1xopxA7JlGVVsf1UHfYPvN.jpg"
-                                    className="card-img-top" alt="...">
-                                <!-- <div className="chart" id="graph" data-percent="88"></div> -->
-
-                                <div className="card-body">
-                                    <h2>
-                                        <a href="#">
-                                            The Hunger Games: The Ballad of Songbirds & Snakes
-                                        </a>
-                                    </h2>
-                                    <span>Dec 15, 2023</span>
-
-                                    <!-- <a href="#" className="btn btn-primary">Go somewhere</a> -->
-                                </div>
-                            </div>
-                            <div className="card">
-                                <img loading="lazy" src="/images/card/29rhl1xopxA7JlGVVsf1UHfYPvN.jpg"
-                                    className="card-img-top" alt="...">
-                                <!-- <div className="chart" id="graph" data-percent="88"></div> -->
-
-                                <div className="card-body">
-                                    <h2>
-                                        <a href="#">
-                                            The Hunger Games: The Ballad of Songbirds & Snakes
-                                        </a>
-                                    </h2>
-                                    <span>Dec 15, 2023</span>
-
-                                    <!-- <a href="#" className="btn btn-primary">Go somewhere</a> -->
-                                </div>
-                            </div>
-
-                            <div className="card">
-                                <img loading="lazy" src="/images/card/29rhl1xopxA7JlGVVsf1UHfYPvN.jpg"
-                                    className="card-img-top" alt="...">
-                                <!-- <div className="chart" id="graph" data-percent="88"></div> -->
-
-                                <div className="card-body">
-                                    <h2>
-                                        <a href="#">
-                                            The Hunger Games: The Ballad of Songbirds & Snakes
-                                        </a>
-                                    </h2>
-                                    <span>Dec 15, 2023</span>
-
-                                    <!-- <a href="#" className="btn btn-primary">Go somewhere</a> -->
-                                </div>
-                            </div>
-                            <div className="card">
-                                <img loading="lazy" src="/images/card/29rhl1xopxA7JlGVVsf1UHfYPvN.jpg"
-                                    className="card-img-top" alt="...">
-                                <!-- <div className="chart" id="graph" data-percent="88"></div> -->
-
-                                <div className="card-body">
-                                    <h2>
-                                        <a href="#">
-                                            The Hunger Games: The Ballad of Songbirds & Snakes
-                                        </a>
-                                    </h2>
-                                    <span>Dec 15, 2023</span>
-
-                                    <!-- <a href="#" className="btn btn-primary">Go somewhere</a> -->
-                                </div>
-                            </div>
-                            <div className="card">
-                                <img loading="lazy" src="/images/card/29rhl1xopxA7JlGVVsf1UHfYPvN.jpg"
-                                    className="card-img-top" alt="...">
-                                <!-- <div className="chart" id="graph" data-percent="88"></div> -->
-
-                                <div className="card-body">
-                                    <h2>
-                                        <a href="#">
-                                            The Hunger Games: The Ballad of Songbirds & Snakes
-                                        </a>
-                                    </h2>
-                                    <span>Dec 15, 2023</span>
-
-                                    <!-- <a href="#" className="btn btn-primary">Go somewhere</a> -->
-                                </div>
-                            </div>
-                            <div className="card">
-                                <img loading="lazy" src="/images/card/29rhl1xopxA7JlGVVsf1UHfYPvN.jpg"
-                                    className="card-img-top" alt="...">
-                                <!-- <div className="chart" id="graph" data-percent="88"></div> -->
-
-                                <div className="card-body">
-                                    <h2>
-                                        <a href="#">
-                                            The Hunger Games: The Ballad of Songbirds & Snakes
-                                        </a>
-                                    </h2>
-                                    <span>Dec 15, 2023</span>
-
-                                    <!-- <a href="#" className="btn btn-primary">Go somewhere</a> -->
-                                </div>
-                            </div>
-                            <div className="card">
-                                <img loading="lazy" src="/images/card/29rhl1xopxA7JlGVVsf1UHfYPvN.jpg"
-                                    className="card-img-top" alt="...">
-                                <!-- <div className="chart" id="graph" data-percent="88"></div> -->
-
-                                <div className="card-body">
-                                    <h2>
-                                        <a href="#">
-                                            The Hunger Games: The Ballad of Songbirds & Snakes
-                                        </a>
-                                    </h2>
-                                    <span>Dec 15, 2023</span>
-
-                                    <!-- <a href="#" className="btn btn-primary">Go somewhere</a> -->
-                                </div>
-                            </div>
-                            <div className="card">
-                                <img loading="lazy" src="/images/card/29rhl1xopxA7JlGVVsf1UHfYPvN.jpg"
-                                    className="card-img-top" alt="...">
-                                <!-- <div className="chart" id="graph" data-percent="88"></div> -->
-
-                                <div className="card-body">
-                                    <h2>
-                                        <a href="#">
-                                            The Hunger Games: The Ballad of Songbirds & Snakes
-                                        </a>
-                                    </h2>
-                                    <span>Dec 15, 2023</span>
-
-                                    <!-- <a href="#" className="btn btn-primary">Go somewhere</a> -->
-                                </div>
-                            </div>
-                            <div className="card">
-                                <img loading="lazy" src="/images/card/29rhl1xopxA7JlGVVsf1UHfYPvN.jpg"
-                                    className="card-img-top" alt="...">
-                                <!-- <div className="chart" id="graph" data-percent="88"></div> -->
-
-                                <div className="card-body">
-                                    <h2>
-                                        <a href="#">
-                                            The Hunger Games: The Ballad of Songbirds & Snakes
-                                        </a>
-                                    </h2>
-                                    <span>Dec 15, 2023</span>
-
-                                    <!-- <a href="#" className="btn btn-primary">Go somewhere</a> -->
+                                    <span>{{ movie.release_date }}</span>
                                 </div>
                             </div>
                         </div>
@@ -401,8 +277,8 @@
 
                         </div>
 
-                        <div className="tab-pane fade" id="nav-home-video-2" role="tabpanel" aria-labelledby="nav-profile-tab"
-                            tabindex="0">
+                        <div className="tab-pane fade" id="nav-home-video-2" role="tabpanel"
+                            aria-labelledby="nav-profile-tab" tabindex="0">
 
                             <div className="card-content">
 
@@ -448,8 +324,8 @@
 
                         </div>
 
-                        <div className="tab-pane fade" id="nav-home-video-3" role="tabpanel" aria-labelledby="nav-profile-tab"
-                            tabindex="0">
+                        <div className="tab-pane fade" id="nav-home-video-3" role="tabpanel"
+                            aria-labelledby="nav-profile-tab" tabindex="0">
 
                             <div className="card-content">
 
@@ -495,8 +371,8 @@
 
                         </div>
 
-                        <div className="tab-pane fade" id="nav-home-video-4" role="tabpanel" aria-labelledby="nav-profile-tab"
-                            tabindex="0">
+                        <div className="tab-pane fade" id="nav-home-video-4" role="tabpanel"
+                            aria-labelledby="nav-profile-tab" tabindex="0">
 
                             <div className="card-content">
 
@@ -733,8 +609,8 @@
 
 
                     </div>
-                    <div className="tab-pane fade" id="nav-movie-tab-aria-2" role="tabpanel" aria-labelledby="nav-movie-tab-2"
-                        tabindex="0">
+                    <div className="tab-pane fade" id="nav-movie-tab-aria-2" role="tabpanel"
+                        aria-labelledby="nav-movie-tab-2" tabindex="0">
 
                         <div className="card-content">
                             <div className="card-content ">
