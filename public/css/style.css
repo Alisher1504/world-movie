@@ -122,7 +122,6 @@
 
 .container .column-content .tab-content .tab-pane .card-content {
     display: flex;
-    align-items: center;
     gap: 20px;
     width: 100%;
     overflow-x: scroll;
