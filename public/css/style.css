@@ -56,6 +56,7 @@
     border: 0;
     border-radius: 30px;
     padding: 10px 20px;
+    outline: none;
 }
 
 .container .col-12 .search_description .search form .search_form button {
@@ -93,9 +94,12 @@
 .container .column-header nav .tab-nav .nav-link.active {
 
 
-    border-radius: 30px;
     color: #c0fecf;
     background-color: #032541;
+    transition: 0.6s;
+    font-weight: 600;
+    font-size: 1em;
+
 }
 
 .container .column-header nav .tab-nav .nav-link.active button {
@@ -105,12 +109,15 @@
 .container .column-header nav .tab-nav .nav-link {
 
     padding: 4px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1em;
 
 }
 
 .column-wrapper {
 
-    margin: 30px;
+    margin: 30px 30px 0px 30px;
 
 }
 
@@ -217,6 +224,11 @@ span {
     
 }
 
+.all-movies-title{
+    font-weight: 600;
+    font-size: 1.5em;
+}
+
 .column-wrapper-2 .container{
 
     background-image: url('/images/video/dYtAgmjym7YX6ARFXkWCktw3rOC.jpg');
@@ -231,7 +243,7 @@ span {
     
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(5, 13, 82, 0.678);
 }
 
 .column-wrapper-2-card .column-header {
@@ -256,6 +268,7 @@ span {
 .container .column-wrapper-2-card .column-header nav .tab-nav .nav-link.active {
     background-color: #1ed5a9;
     color: #000;
+    transition: 0.6s;
 }
 
 

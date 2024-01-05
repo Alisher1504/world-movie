@@ -25,7 +25,7 @@ export default {
         this.forRentMovie();
         this.inTheaterMovie();
         this.trendingMovie();
-        this.trendingTvMovie(); 
+        this.trendingTvMovie();
         this.videoMoviePopular();
     },
     methods: {
@@ -225,6 +225,7 @@ export default {
 </script>
 
 <template>
+    
     <section>
         <!-- {{ populationmove?.results }} -->
         <div class="container">
@@ -263,12 +264,11 @@ export default {
         <div class="container">
 
             <div class="column-header">
-                Trending
+                <h2 class="all-movies-title">Trending</h2>
                 <nav>
                     <div class="tab-nav" id="nav-tab" role="tablist">
-                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
-                            data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
-                            aria-selected="true">Home</button>
+                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                            type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
                         <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
                             type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
                     </div>
@@ -338,7 +338,7 @@ export default {
             <div class="column-wrapper-2-card">
 
                 <div class="column-header">
-                    <h2>Latest Trailers</h2>
+                    <h2 class="all-movies-title">Latest Trailers</h2>
                     <nav>
                         <div class="tab-nav" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
@@ -369,14 +369,14 @@ export default {
 
                             <div class="card-content">
 
-                                <div v-for="movie in videoMoviePopular1" class="card">
-                                    <img data-bs-toggle="modal" :data-bs-target="`#exampleModal_${movie.id}`"
-                                    :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" class="card-img-top"
-                                        alt="...">
+                                <div v-for="(movie, index) in videoMoviePopular1" :key="index" class="card">
+                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+                                        class="card-img-top trailer-image" alt="..." data-bs-toggle="modal"
+                                        :data-bs-target="'#exampleModal' + index" />
 
-                                    <div data-bs-toggle="modal" :data-bs-target="`#exampleModal_${movie.id}`" class="video-play">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height
-                                        ="100" fill="currentColor"
+                                    <div class="video-play" data-bs-toggle="modal"
+                                        :data-bs-target="'#exampleModal' + index">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor"
                                             class="bi bi-play-fill" viewBox="0 0 16 16">
                                             <path
                                                 d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"
@@ -390,23 +390,23 @@ export default {
                                     </div>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" :id="`#exampleModal_${movie.id}`" tabindex="-1"
+                                    <div class="modal fade" :id="'exampleModal' + index" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-
                                                 <div class="modal-body video-trailer-modal">
                                                     <iframe width="100%" height="100%"
-                                                        src="https://www.youtube.com/embed/a97cL2zxnes?si=lYSXComJ9vUkpy5q"
+                                                        :src="'https://www.youtube.com/embed/' + movie.videoId"
                                                         title="YouTube video player" frameborder="0"
                                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                                         allowfullscreen></iframe>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- End Modal -->
                                 </div>
+
 
                             </div>
 
@@ -417,12 +417,13 @@ export default {
 
                             <div class="card-content">
 
-                                <div class="card">
-                                    <img data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                        src="/images/card/29rhl1xopxA7JlGVVsf1UHfYPvN.jpg" class="card-img-top"
-                                        alt="...">
+                                <div v-for="(movie, index) in videoMoviePopular1" :key="index" class="card">
+                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+                                        class="card-img-top trailer-image" alt="..." data-bs-toggle="modal"
+                                        :data-bs-target="'#exampleModal' + index" />
 
-                                    <div data-bs-toggle="modal" data-bs-target="#exampleModal" class="video-play">
+                                    <div class="video-play" data-bs-toggle="modal"
+                                        :data-bs-target="'#exampleModal' + index">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor"
                                             class="bi bi-play-fill" viewBox="0 0 16 16">
                                             <path
@@ -437,39 +438,39 @@ export default {
                                     </div>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                    <div class="modal fade" :id="'exampleModal' + index" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-
                                                 <div class="modal-body video-trailer-modal">
                                                     <iframe width="100%" height="100%"
-                                                        src="https://www.youtube.com/embed/a97cL2zxnes?si=lYSXComJ9vUkpy5q"
+                                                        :src="'https://www.youtube.com/embed/' + movie.videoId"
                                                         title="YouTube video player" frameborder="0"
                                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                                         allowfullscreen></iframe>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- End Modal -->
                                 </div>
 
                             </div>
 
                         </div>
 
-                        <div class="tab-pane fade" id="nav-home-video-2" role="tabpanel"
-                            aria-labelledby="nav-profile-tab" tabindex="0">
+                        <div class="tab-pane fade" id="nav-home-video-2" role="tabpanel" aria-labelledby="nav-profile-tab"
+                            tabindex="0">
 
                             <div class="card-content">
 
-                                <div class="card">
-                                    <img data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                        src="/images/card/29rhl1xopxA7JlGVVsf1UHfYPvN.jpg" class="card-img-top"
-                                        alt="...">
+                                <div v-for="(movie, index) in videoMoviePopular1" :key="index" class="card">
+                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+                                        class="card-img-top trailer-image" alt="..." data-bs-toggle="modal"
+                                        :data-bs-target="'#exampleModal' + index" />
 
-                                    <div data-bs-toggle="modal" data-bs-target="#exampleModal" class="video-play">
+                                    <div class="video-play" data-bs-toggle="modal"
+                                        :data-bs-target="'#exampleModal' + index">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor"
                                             class="bi bi-play-fill" viewBox="0 0 16 16">
                                             <path
@@ -484,39 +485,39 @@ export default {
                                     </div>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                    <div class="modal fade" :id="'exampleModal' + index" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-
                                                 <div class="modal-body video-trailer-modal">
                                                     <iframe width="100%" height="100%"
-                                                        src="https://www.youtube.com/embed/a97cL2zxnes?si=lYSXComJ9vUkpy5q"
+                                                        :src="'https://www.youtube.com/embed/' + movie.videoId"
                                                         title="YouTube video player" frameborder="0"
                                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                                         allowfullscreen></iframe>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- End Modal -->
                                 </div>
 
                             </div>
 
                         </div>
 
-                        <div class="tab-pane fade" id="nav-home-video-3" role="tabpanel"
-                            aria-labelledby="nav-profile-tab" tabindex="0">
+                        <div class="tab-pane fade" id="nav-home-video-3" role="tabpanel" aria-labelledby="nav-profile-tab"
+                            tabindex="0">
 
                             <div class="card-content">
 
-                                <div class="card">
-                                    <img data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                        src="/images/card/29rhl1xopxA7JlGVVsf1UHfYPvN.jpg" class="card-img-top"
-                                        alt="...">
+                                <div v-for="(movie, index) in videoMoviePopular1" :key="index" class="card">
+                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+                                        class="card-img-top trailer-image" alt="..." data-bs-toggle="modal"
+                                        :data-bs-target="'#exampleModal' + index" />
 
-                                    <div data-bs-toggle="modal" data-bs-target="#exampleModal" class="video-play">
+                                    <div class="video-play" data-bs-toggle="modal"
+                                        :data-bs-target="'#exampleModal' + index">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor"
                                             class="bi bi-play-fill" viewBox="0 0 16 16">
                                             <path
@@ -531,39 +532,39 @@ export default {
                                     </div>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                    <div class="modal fade" :id="'exampleModal' + index" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-
                                                 <div class="modal-body video-trailer-modal">
                                                     <iframe width="100%" height="100%"
-                                                        src="https://www.youtube.com/embed/a97cL2zxnes?si=lYSXComJ9vUkpy5q"
+                                                        :src="'https://www.youtube.com/embed/' + movie.videoId"
                                                         title="YouTube video player" frameborder="0"
                                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                                         allowfullscreen></iframe>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- End Modal -->
                                 </div>
 
                             </div>
 
                         </div>
 
-                        <div class="tab-pane fade" id="nav-home-video-4" role="tabpanel"
-                            aria-labelledby="nav-profile-tab" tabindex="0">
+                        <div class="tab-pane fade" id="nav-home-video-4" role="tabpanel" aria-labelledby="nav-profile-tab"
+                            tabindex="0">
 
                             <div class="card-content">
 
-                                <div class="card">
-                                    <img data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                        src="/images/card/29rhl1xopxA7JlGVVsf1UHfYPvN.jpg" class="card-img-top"
-                                        alt="...">
+                                <div v-for="(movie, index) in videoMoviePopular1" :key="index" class="card">
+                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+                                        class="card-img-top trailer-image" alt="..." data-bs-toggle="modal"
+                                        :data-bs-target="'#exampleModal' + index" />
 
-                                    <div data-bs-toggle="modal" data-bs-target="#exampleModal" class="video-play">
+                                    <div class="video-play" data-bs-toggle="modal"
+                                        :data-bs-target="'#exampleModal' + index">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor"
                                             class="bi bi-play-fill" viewBox="0 0 16 16">
                                             <path
@@ -578,22 +579,21 @@ export default {
                                     </div>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                    <div class="modal fade" :id="'exampleModal' + index" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-
                                                 <div class="modal-body video-trailer-modal">
                                                     <iframe width="100%" height="100%"
-                                                        src="https://www.youtube.com/embed/a97cL2zxnes?si=lYSXComJ9vUkpy5q"
+                                                        :src="'https://www.youtube.com/embed/' + movie.videoId"
                                                         title="YouTube video player" frameborder="0"
                                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                                         allowfullscreen></iframe>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- End Modal -->
                                 </div>
 
                             </div>
@@ -612,7 +612,7 @@ export default {
         <div class="container">
 
             <div class="column-header">
-                What's Popular
+                <h2 class="all-movies-title">What's Popular</h2>
                 <nav>
                     <div class="tab-nav" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="popular-tab-1" data-bs-toggle="tab"
@@ -630,7 +630,7 @@ export default {
                     </div>
                 </nav>
             </div>
-            <div class="column-content puls-image">
+            <div class="column-content puls-image pb-0">
                 <div class="tab-content" id="nav-tabContent">
 
                     <div class="tab-pane fade show active" id="popular-tab-aria-1" role="tabpanel"
@@ -751,7 +751,7 @@ export default {
         <div class="container">
 
             <div class="column-header">
-                Trending
+                <h2 class="all-movies-title">Trending</h2>
                 <nav>
                     <div class="tab-nav" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="nav-movie-tab-1" data-bs-toggle="tab"
@@ -793,8 +793,8 @@ export default {
 
 
                     </div>
-                    <div class="tab-pane fade" id="nav-movie-tab-aria-2" role="tabpanel"
-                        aria-labelledby="nav-movie-tab-2" tabindex="0">
+                    <div class="tab-pane fade" id="nav-movie-tab-aria-2" role="tabpanel" aria-labelledby="nav-movie-tab-2"
+                        tabindex="0">
 
                         <div class="card-content ">
                             <div v-for="movie in trendingTv" :key="movie.id" class="card">
@@ -835,7 +835,7 @@ export default {
             <div class="col-md-12">
 
                 <div class="header-column">
-                    <h2>Join Today</h2>
+                    <h2 class="all-movies-title">Join Today</h2>
                 </div>
 
                 <div class="row justify-content-evenly align-items-center">
@@ -872,4 +872,6 @@ export default {
         </div>
 
     </section>
+
 </template>
+
