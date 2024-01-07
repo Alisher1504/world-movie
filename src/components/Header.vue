@@ -1,15 +1,15 @@
 
 <script>
 
+import { RouterLink } from "vue-router"
 
 </script>
 
 <template>
     <nav class="navbar navbar-expand-lg">
         <div class="container ps-5">
-            <a class="navbar-brand" href="#">
-                Logo
-            </a>
+
+            <router-link class="navbar-brand" to="/">Logo</router-link>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -23,7 +23,7 @@
                         <a class="nav-link" href="#">TV Shows</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">People</a>
+                        <router-link class="nav-link" to="/people">People</router-link>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">More</a>
