@@ -127,8 +127,11 @@
 
 .user-cards .card-content .card {
 
-    width: 138px;
-    height: 200px;
+    min-width: 138px;
+    max-width: 138px;
+    /* height: 200px; */
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
 
 }
 
@@ -136,10 +139,200 @@
     padding: 0px;
 }
 
-.user-cards .card-content .card .card-body img{
+.user-cards .card-content .card .card-footer {
+    background-color: white;
+    border: none;
+    padding: 7px;
+}
+
+.user-cards .card-content .card .card-body img {
     width: 100%;
     height: 100%;
-    border: 10px;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.user-cards .card-content {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    overflow-x: scroll;
+    padding: 5px 0px 20px 5px;
+}
+
+.user-cards .card-content::-webkit-scrollbar {
+    width: 20px;
+    height: 8px;
+}
+
+.user-cards .card-content::-webkit-scrollbar-thumb {
+    background: silver;
+    border-radius: 10px;
+    height: 10px;
+}
+
+.user-cards .card-content .card .card-footer a {
+
+    font-weight: 700;
+    color: #000;
+    text-decoration: none;
+
+}
+
+.user-cards .card-content .card .card-footer p {
+    padding: 0px;
+    margin: 0px;
+}
+
+.user-tab-panel .nav {
+    gap: 40px;
+    display: flex;
+    align-items: center;
+
+}
+
+.user-tab-panel .nav .nav-item .nav-link {
+    padding: 0px;
+}
+
+.social {
+    font-weight: 600;
+    font-size: 1.4em;
+    text-decoration: none;
+    color: #000;
+}
+
+.user-tab-panel .nav .nav-item .nav-link {
+    font-size: 1em;
+    color: #000;
+    font-weight: 600;
+}
+
+.user-tab-panel .nav .nav-item .nav-link.active {
+    border-bottom: 4px solid #000;
+}
+
+.review-content {
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+    border-radius: 7px;
+    margin-top: 10px;
+}
+
+.review-content-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.review-content-info img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 15px;
+    color: #000;
+}
+
+.review-content-info .review-info h3 {
+    font-size: 1.3em;
+    line-height: 1em;
+    font-weight: 700;
+    margin: 0px;
+}
+
+.review-content-info .review-info h3 a {
+    color: #000;
+    text-decoration: none;
+}
+
+
+.review-content-info .review-info .rating {
+
+    background: #000;
+    padding: 4px 8px;
+    color: #fff;
+    font-size: .7em;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    display: inline;
+    margin-right: 10px;
+
+}
+
+.review-content-info h5 {
+    font-weight: 300;
+    font-size: .9em;
+    display: inline;
+}
+
+.all-reviews {
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-top: 20px;
+}
+
+.all-reviews a {
+    color: #000;
+    text-decoration: none;
+}
+
+.nav-link-count {
+    align-items: center;
+    opacity: .6;
+    font-weight: 600;
+}
+
+.discussion {
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+    border-radius: 7px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.discussion .discussion-info-1 img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.discussion .discussion-info-1 a {
+    text-decoration: none;
+    color: #000;
+    font-size: 1em;
+}
+
+.discussion-info-2 p,
+.discussion-info-3 p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.media .nav {
+    gap: 40px;
+    display: flex;
+    align-items: center;
+
+}
+
+.media .nav .nav-item .nav-link {
+    padding: 0px;
+}
+
+
+.media .nav .nav-item .nav-link {
+    font-size: 1em;
+    color: #000;
+    font-weight: 600;
+}
+
+.media .nav .nav-item .nav-link.active {
+    border-bottom: 4px solid #000;
 }
 
 </style>
@@ -249,7 +442,7 @@
 
         <div class="container">
 
-            
+
 
             <div class="row">
 
@@ -266,8 +459,11 @@
                                 <div class="card-body">
                                     <img src="../../../../public/images/person/aqua.jpg" alt="">
                                 </div>
-                                <div class="card-body">
-                                    footer
+                                <div class="card-footer">
+                                    <a href="#">Robert Downey Jr.</a>
+                                    <p>
+                                        Tony Stark / Iron Man
+                                    </p>
                                 </div>
 
                             </div>
@@ -276,15 +472,173 @@
 
                     </div>
 
+                    <h1 class="title-content">Full Cast & Crew</h1>
+
+                    <hr>
+
+                    <div class="user-tab-panel">
+
+                        <ul class="nav" id="myTab" role="tablist">
+                            <a href="#" class="social">Social</a>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                    data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane"
+                                    aria-selected="true">Reviews <span class="nav-link-count">32</span></button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                    data-bs-target="#profile-tab-pane" type="button" role="tab"
+                                    aria-controls="profile-tab-pane" aria-selected="false">Discussions <span
+                                        class="nav-link-count">108</span></button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+
+                            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
+                                aria-labelledby="home-tab" tabindex="0">
+
+                                <div class="review-content">
+
+                                    <div class="review-content-info">
+
+                                        <img src="../../../../public/images/person/aqua.jpg" alt="">
+
+                                        <div class="review-info">
+                                            <h3><a href="#">A review by GenerationofSwine</a></h3>
+                                            <span class="rating"><i class="bi bi-star-fill"></i> <span>10.0</span></span>
+                                            <h5>Written by GenerationofSwine on January 14, 2023</h5>
+                                        </div>
+
+                                    </div>
+
+                                    I walked into this frightened that there would be too man characters and the result
+                                    would be an empty vacant shell of a movie that was pulled in so many different
+                                    directions it couldn't make sense of itself.
+                                </div>
+
+                                <p class="all-reviews">
+                                    <a href="#">Read All Reviews</a>
+                                </p>
+
+                            </div>
+
+
+
+                            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
+                                tabindex="0">
+
+                                <div class="discussion">
+
+                                    <div class="discussion-info-1">
+                                        <img loading="lazy" src="../../../../public/images/person/aqua.jpg" alt="">
+                                        <a href="">
+                                            2018: Which film hurt YOUR Rear End the most sitting in Cinemas this Year?
+                                        </a>
+                                    </div>
+
+                                    <div class="discussion-info-2">
+                                        <p>
+                                            open
+                                        </p>
+                                    </div>
+
+                                    <div class="discussion-info-3">
+                                        <p>
+                                            16
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                                <p class="all-reviews">
+                                    <a href="#">Go to Discussions</a>
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="media">
+
+                        <ul class="nav" id="myTab" role="tablist">
+                            <a href="#" class="social">Media</a>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="media-tab-1" data-bs-toggle="tab"
+                                    data-bs-target="#media-1" type="button" role="tab" aria-controls="media-1"
+                                    aria-selected="true">Reviews <span class="nav-link-count">32</span></button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="media-tab-2" data-bs-toggle="tab"
+                                    data-bs-target="#media-2" type="button" role="tab"
+                                    aria-controls="media-2" aria-selected="false">Discussions <span
+                                        class="nav-link-count">108</span></button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="media-tab-3" data-bs-toggle="tab"
+                                    data-bs-target="#media-3" type="button" role="tab"
+                                    aria-controls="media-3" aria-selected="false">Discussions <span
+                                        class="nav-link-count">108</span></button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="media-tab-4" data-bs-toggle="tab"
+                                    data-bs-target="#media-4" type="button" role="tab"
+                                    aria-controls="media-4" aria-selected="false">Discussions <span
+                                        class="nav-link-count">108</span></button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+
+                            <div class="tab-pane fade show active" id="media-1" role="tabpanel"
+                                aria-labelledby="media-tab-1" tabindex="0">
+
+                                ok
+
+                            </div>
+
+
+
+                            <div class="tab-pane fade" id="media-2" role="tabpanel" aria-labelledby="media-tab-2"
+                                tabindex="0">
+
+                               mde
+
+                            </div>
+
+                            <div class="tab-pane fade" id="media-3" role="tabpanel" aria-labelledby="media-tab-3"
+                                tabindex="0">
+
+                               mde3
+
+                            </div>
+
+                            <div class="tab-pane fade" id="media-4" role="tabpanel" aria-labelledby="media-tab-4"
+                                tabindex="0">
+
+                               mde4
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
-                <div class="col-3">f</div>
+                <div class="col-3">
+                    cf
+                </div>
 
             </div>
 
         </div>
 
     </section>
-
 </template>
 
 <script>
