@@ -33,7 +33,6 @@ export default {
             axios.request(option).then((response) => {
 
                 this.peoplemove = response.data?.results
-
             }).catch((error) => {
                 console.log(error);
             })
