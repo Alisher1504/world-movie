@@ -335,6 +335,215 @@
     border-bottom: 4px solid #000;
 }
 
+.media-img-card {
+    min-width: 533px;
+    max-width: 533px;
+    height: 300px;
+}
+
+.media-img-card-2 {
+    min-width: 200px;
+    max-width: 200px;
+    height: 300px;
+}
+
+.media-img-card-2 img {
+    width: 100%;
+    height: 100%;
+}
+
+.media-img-card img {
+    width: 100%;
+    height: 100%;
+}
+
+.sss {
+    display: flex;
+}
+
+.main-new-tab {
+    width: 100%;
+    overflow-x: scroll;
+    border-radius: 10px 0px 0px 0px;
+    margin-top: 10px;
+}
+
+.main-new-tab::-webkit-scrollbar {
+    width: 20px;
+    height: 8px;
+}
+
+.main-new-tab::-webkit-scrollbar-thumb {
+    background: silver;
+    border-radius: 10px;
+    height: 10px;
+}
+
+.collection-info {
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+    border-radius: 7px;
+    margin-top: 10px;
+    background-image: url('../../../../public/images/person/avanger.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.collection {
+
+    background-color: #032541d7;
+    padding: 70px 20px;
+    color: #fff;
+
+}
+
+.collection .info h2 {
+
+    font-size: 1.9em;
+    font-weight: 600;
+    color: #fff;
+
+}
+
+.collection .info p {
+
+    font-size: 1.1em;
+
+}
+
+.collection .info a {
+
+    color: #fff;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+    background-color: rgba(31.5, 31.5, 52.5, 1);
+    padding: 7px 20px;
+    border-radius: 20px;
+
+}
+
+.collection .info a:hover {
+
+    background-color: #000;
+
+}
+
+.recomindation .recomendation-content .card {
+
+    min-width: 250px;
+    max-width: 250px;
+    border: none;
+
+}
+
+.recomindation .recomendation-content {
+    display: flex;
+    width: 100%;
+    overflow-x: scroll;
+    gap: 15px;
+    padding: 0px 0px 20px 0px;
+}
+
+.recomindation .recomendation-content .card .card-body {
+
+    padding: 0px;
+
+}
+
+.recomindation .recomendation-content .card .card-body img {
+
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+
+}
+
+.recomindation .recomendation-content .card .card-footer {
+
+    padding: 0px;
+    border: none;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.recomindation .recomendation-content .card .card-footer a {
+
+    text-decoration: none;
+    color: #000;
+    font-weight: 400;
+    font-size: 1em;
+
+}
+
+.recomindation .recomendation-content::-webkit-scrollbar {
+    width: 20px;
+    height: 8px;
+}
+
+.recomindation .recomendation-content::-webkit-scrollbar-thumb {
+    background: silver;
+    border-radius: 10px;
+    height: 10px;
+}
+
+
+.icons {
+    font-size: 1.5em;
+}
+
+.icons .bi {
+    margin-right: 15px;
+}
+
+.status p strong {
+    display: block;
+}
+
+.keywords {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.keywords .keyword-item {
+
+    background-color: rgba(0, 0, 0, .1);
+    color: #000;
+    text-decoration: none;
+    border: 1px solid #d7d7d7;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: .9em;
+
+}
+
+.content-scores .card {
+    border: none;
+}
+
+.content-scores .card .card-body {
+
+    padding: 10px;
+    background-color: rgba(31.5, 31.5, 52.5, 1);
+    border-radius: 10px 10px 0px 0px;
+    color: #fff;
+
+}
+
+.content-scores .card .card-footer {
+
+    padding: 4px 0px 4px 10px;
+    background-color: rgba(0,0,0,.1);
+    border-radius: 0px 0px 10px 10px;
+    color: #000;
+    font-size: .9em;
+}
 </style>
 
 <template>
@@ -569,60 +778,165 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="media-tab-1" data-bs-toggle="tab"
                                     data-bs-target="#media-1" type="button" role="tab" aria-controls="media-1"
-                                    aria-selected="true">Reviews <span class="nav-link-count">32</span></button>
+                                    aria-selected="true">Most Popular <span class="nav-link-count">32</span></button>
                             </li>
 
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="media-tab-2" data-bs-toggle="tab"
-                                    data-bs-target="#media-2" type="button" role="tab"
-                                    aria-controls="media-2" aria-selected="false">Discussions <span
-                                        class="nav-link-count">108</span></button>
+                                <button class="nav-link" id="media-tab-2" data-bs-toggle="tab" data-bs-target="#media-2"
+                                    type="button" role="tab" aria-controls="media-2" aria-selected="false">Videos <span
+                                        class="nav-link-count"> 4</span></button>
                             </li>
 
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="media-tab-3" data-bs-toggle="tab"
-                                    data-bs-target="#media-3" type="button" role="tab"
-                                    aria-controls="media-3" aria-selected="false">Discussions <span
-                                        class="nav-link-count">108</span></button>
+                                <button class="nav-link" id="media-tab-3" data-bs-toggle="tab" data-bs-target="#media-3"
+                                    type="button" role="tab" aria-controls="media-3" aria-selected="false">Backdrops <span
+                                        class="nav-link-count"> 44</span></button>
                             </li>
 
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="media-tab-4" data-bs-toggle="tab"
-                                    data-bs-target="#media-4" type="button" role="tab"
-                                    aria-controls="media-4" aria-selected="false">Discussions <span
-                                        class="nav-link-count">108</span></button>
+                                <button class="nav-link" id="media-tab-4" data-bs-toggle="tab" data-bs-target="#media-4"
+                                    type="button" role="tab" aria-controls="media-4" aria-selected="false">Posters <span
+                                        class="nav-link-count"> 190</span></button>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
 
-                            <div class="tab-pane fade show active" id="media-1" role="tabpanel"
+                            <div class="tab-pane main-new-tab fade show active" id="media-1" role="tabpanel"
                                 aria-labelledby="media-tab-1" tabindex="0">
+                                <div class="sss">
 
-                                ok
+                                    <div class="media-img-card">
+
+                                        <img src="../../../../public/images/person/avanger.jpg" alt="">
+
+                                    </div>
+
+                                    <div class="media-img-card">
+
+                                        <img src="../../../../public/images/person/avanger.jpg" alt="">
+
+                                    </div>
+                                    <div class="media-img-card">
+
+                                        <img src="../../../../public/images/person/avanger.jpg" alt="">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane main-new-tab fade" id="media-2" role="tabpanel"
+                                aria-labelledby="media-tab-2" tabindex="0">
+
+                                <div class="sss">
+
+                                    <div class="media-img-card">
+
+                                        <img src="../../../../public/images/person/avanger.jpg" alt="">
+
+                                    </div>
+
+                                    <div class="media-img-card">
+
+                                        <img src="../../../../public/images/person/avanger.jpg" alt="">
+
+                                    </div>
+                                    <div class="media-img-card">
+
+                                        <img src="../../../../public/images/person/avanger.jpg" alt="">
+
+                                    </div>
+                                </div>
+
 
                             </div>
 
+                            <div class="tab-pane main-new-tab fade" id="media-3" role="tabpanel"
+                                aria-labelledby="media-tab-3" tabindex="0">
 
+                                <div class="sss">
 
-                            <div class="tab-pane fade" id="media-2" role="tabpanel" aria-labelledby="media-tab-2"
-                                tabindex="0">
+                                    <div class="media-img-card">
 
-                               mde
+                                        <img src="../../../../public/images/person/avanger.jpg" alt="">
+
+                                    </div>
+
+                                    <div class="media-img-card">
+
+                                        <img src="../../../../public/images/person/avanger.jpg" alt="">
+
+                                    </div>
+                                    <div class="media-img-card">
+
+                                        <img src="../../../../public/images/person/avanger.jpg" alt="">
+
+                                    </div>
+                                </div>
+
 
                             </div>
 
-                            <div class="tab-pane fade" id="media-3" role="tabpanel" aria-labelledby="media-tab-3"
-                                tabindex="0">
+                            <div class="tab-pane main-new-tab fade" id="media-4" role="tabpanel"
+                                aria-labelledby="media-tab-4" tabindex="0">
 
-                               mde3
+                                <div class="sss">
+
+                                    <div class="media-img-card-2">
+
+                                        <img src="../../../../public/images/person/avangerpeople.jpg" alt="">
+
+                                    </div>
+
+                                </div>
+
 
                             </div>
 
-                            <div class="tab-pane fade" id="media-4" role="tabpanel" aria-labelledby="media-tab-4"
-                                tabindex="0">
+                        </div>
 
-                               mde4
+                    </div>
 
+                    <hr class="my-4">
+
+                    <div class="collection-info">
+
+                        <div class="collection">
+
+                            <div class="info">
+
+                                <h2>Part of the The Avengers Collection</h2>
+
+                                <p>
+                                    Includes The Avengers, Avengers: Age of Ultron, Avengers: Infinity War, and Avengers:
+                                    Endgame
+                                </p>
+
+                                <a href="#">
+                                    VIEW THE COLLECTION
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="recomindation">
+
+                        <h1 class="title-content">Recommendations</h1>
+
+                        <div class="recomendation-content">
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="../../../../public/images/person/avanger.jpg" alt="">
+                                </div>
+                                <div class="card-footer">
+                                    <a href="#">name</a>
+                                    <span>69%</span>
+                                </div>
                             </div>
 
                         </div>
@@ -631,7 +945,79 @@
 
                 </div>
                 <div class="col-3">
-                    cf
+
+                    <div class="icons">
+
+                        <i class="bi bi-facebook"></i>
+                        <i class="bi bi-twitter"></i>
+                        <i class="bi bi-instagram"></i>
+                        <i class="bi bi-link-45deg"></i>
+
+                    </div>
+
+                    <div class="status">
+
+                        <p class="mt-3">
+
+                            <strong>Status</strong>
+                            resolved
+
+                        </p>
+
+                        <p class="mt-3">
+
+                            <strong>Original Language</strong>
+                            resolved
+
+                        </p>
+
+                        <p class="mt-3">
+
+                            <strong>Budget</strong>
+                            resolved
+
+                        </p>
+
+                        <p class="mt-3">
+
+                            <strong>Revenue</strong>
+                            resolved
+
+                        </p>
+
+                    </div>
+
+                    <div class="keywords">
+
+                        <a href="#" class="keyword-item">new york city</a>
+                        <a href="#" class="keyword-item">vfdvfdcity</a>
+                        <a href="#" class="keyword-item">vfd</a>
+                        <a href="#" class="keyword-item">vfdvdf</a>
+                        <a href="#" class="keyword-item">new vdfvfdvfd</a>
+                        <a href="#" class="keyword-item">new york </a>
+                        <a href="#" class="keyword-item">new vfdvfdvfdvfdvfdvfd</a>
+
+                    </div>
+
+                    <hr class="my-4">
+
+
+                    <div class="content-scores">
+                        <h1 class="title-content m-0">Content Score</h1>
+
+                        <div class="card">
+
+                            <div class="card-body">
+                                100
+                            </div>
+                            <div class="card-footer">
+                                Yes! Looking good!
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
