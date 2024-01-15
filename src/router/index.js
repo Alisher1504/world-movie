@@ -22,7 +22,7 @@ const router = createRouter({
     },
 
     {
-      path: '/movie/view',
+      path: '/movie/view/:id',
       name: 'movie',
       component: () => import('../views/pages/movie/view.vue')
     }

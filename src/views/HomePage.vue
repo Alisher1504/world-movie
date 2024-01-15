@@ -2,6 +2,7 @@
 <script>
 
 import axios from 'axios';
+import { RouterLink } from 'vue-router';
 
 export default {
     data() {
@@ -288,9 +289,9 @@ export default {
 
                                 <div class="card-body">
                                     <h2>
-                                        <a href="#">
+                                        <router-link :to="'movie/view/' + movie.id">
                                             {{ movie.original_title }}
-                                        </a>
+                                        </router-link>
                                     </h2>
                                     <span>{{ movie.release_date }}</span>
                                 </div>

@@ -137,6 +137,7 @@
 
 .user-cards .card-content .card .card-body {
     padding: 0px;
+    max-height: 175px;
 }
 
 .user-cards .card-content .card .card-footer {
@@ -539,7 +540,7 @@
 .content-scores .card .card-footer {
 
     padding: 4px 0px 4px 10px;
-    background-color: rgba(0,0,0,.1);
+    background-color: rgba(0, 0, 0, .1);
     border-radius: 0px 0px 10px 10px;
     color: #000;
     font-size: .9em;
@@ -558,7 +559,8 @@
 
                         <div class="movie-image">
 
-                            <img src="../../../../public/images/person/aqua.jpg" alt="">
+                            <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + movieGetById.backdrop_path"
+                                alt="">
 
                         </div>
 
@@ -567,7 +569,8 @@
 
                         <div class="content">
 
-                            <h2 class="title"><a href="#">Aquaman and the Lost Kingdom</a> <span>(2023)</span></h2>
+                            <h2 class="title"><a href="#">{{ movieGetById.original_title }}</a> <span>({{
+                                movieGetById.release_date }})</span></h2>
 
                             <div class="facts mt-2">
 
@@ -576,16 +579,16 @@
                                 </div>
 
                                 <div class="data">
-                                    13212321
+                                    {{ movieGetById.release_date }}
                                 </div>
                                 <div class="rounded"></div>
-                                <div class="animation">
-                                    adfada, asdada, asdasd
+                                <div class="animation" v-for="animation in movieGetById.genres">
+                                    {{ animation.name }},
                                 </div>
-                                <div class="rounded"></div>
-                                <div class="time">
+                                <!-- <div class="rounded"></div> -->
+                                <!-- <div class="time">
                                     23442
-                                </div>
+                                </div> -->
 
                             </div>
 
@@ -623,8 +626,7 @@
                                 <h3>Overview</h3>
 
                                 <p>
-                                    Top special agent Lucinda Kavsky works for a secret part of the CIA. She's given a
-                                    special assignment but then set up by her own agency.
+                                    {{ movieGetById.overview }}
                                 </p>
 
                             </div>
@@ -663,15 +665,15 @@
 
                         <div class="card-content">
 
-                            <div class="card">
+                            <div class="card" v-for="person in castpersons.cast">
 
                                 <div class="card-body">
-                                    <img src="../../../../public/images/person/aqua.jpg" alt="">
+                                    <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + person.profile_path" alt="">
                                 </div>
                                 <div class="card-footer">
-                                    <a href="#">Robert Downey Jr.</a>
+                                    <router-link :to="'/person/view/' + person.id">{{ person.original_name }}</router-link>
                                     <p>
-                                        Tony Stark / Iron Man
+                                        {{ person.character.slice(0, 10) }}
                                     </p>
                                 </div>
 
@@ -960,28 +962,28 @@
                         <p class="mt-3">
 
                             <strong>Status</strong>
-                            resolved
+                            {{ movieGetById.status }}
 
                         </p>
 
                         <p class="mt-3">
 
                             <strong>Original Language</strong>
-                            resolved
+                            {{ movieGetById.original_language }}
 
                         </p>
 
                         <p class="mt-3">
 
                             <strong>Budget</strong>
-                            resolved
+                            ${{ movieGetById.budget }}
 
                         </p>
 
                         <p class="mt-3">
 
                             <strong>Revenue</strong>
-                            resolved
+                            ${{ movieGetById.revenue }}
 
                         </p>
 
@@ -989,13 +991,9 @@
 
                     <div class="keywords">
 
-                        <a href="#" class="keyword-item">new york city</a>
-                        <a href="#" class="keyword-item">vfdvfdcity</a>
-                        <a href="#" class="keyword-item">vfd</a>
-                        <a href="#" class="keyword-item">vfdvdf</a>
-                        <a href="#" class="keyword-item">new vdfvfdvfd</a>
-                        <a href="#" class="keyword-item">new york </a>
-                        <a href="#" class="keyword-item">new vfdvfdvfdvfdvfdvfd</a>
+                        <a href="#" class="keyword-item" v-for="keyword in keywordstomovie.keywords">
+                            {{ keyword.name }}
+                        </a>
 
                     </div>
 
@@ -1028,14 +1026,78 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { RouterLink } from 'vue-router';
 
 export default {
 
+    data() {
+        return {
+            movieGetById: {},
+            keywordstomovie: [],
+            castpersons: []
+        }
+    },
+
     mounted() {
         this.canvas();
+        this.movieFind();
+        this.keywords();
+        this.casts();
     },
 
     methods: {
+
+        movieFind() {
+
+            const options = {
+                method: 'GET',
+                url: `https://api.themoviedb.org/3/movie/${this.$route.params.id}?language=en-US`,
+                headers: {
+                    accept: 'application/json',
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMjRmMTMwZDhkMWRiOGUzYTFkOGQxZTJkZGEyZmIzYyIsInN1YiI6IjY1OTRmMWZiZDdhNzBhMTM1NzY4ZjhiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.geWveJFNg7mp1mk5if-2SWEdprOb23e6SoMibi8So3I'
+                }
+            }
+
+            axios.request(options).then((response) => {
+                this.movieGetById = response.data
+            }).catch((error) => {
+                console.log(error);
+            })
+
+        },
+        keywords() {
+            const options = {
+                method: 'GET',
+                url: `https://api.themoviedb.org/3/movie/${this.$route.params.id}/keywords`,
+                headers: {
+                    accept: 'application/json',
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMjRmMTMwZDhkMWRiOGUzYTFkOGQxZTJkZGEyZmIzYyIsInN1YiI6IjY1OTRmMWZiZDdhNzBhMTM1NzY4ZjhiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.geWveJFNg7mp1mk5if-2SWEdprOb23e6SoMibi8So3I'
+                }
+            }
+
+            axios.request(options).then((response) => {
+                this.keywordstomovie = response.data
+            }).catch((error) => {
+                console.log(error);
+            })
+        },
+        casts() {
+            const options = {
+                method: 'GET',
+                url: `https://api.themoviedb.org/3/movie/${this.$route.params.id}/credits?language=en-US`,
+                headers: {
+                    accept: 'application/json',
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMjRmMTMwZDhkMWRiOGUzYTFkOGQxZTJkZGEyZmIzYyIsInN1YiI6IjY1OTRmMWZiZDdhNzBhMTM1NzY4ZjhiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.geWveJFNg7mp1mk5if-2SWEdprOb23e6SoMibi8So3I'
+                }
+            }
+
+            axios.request(options).then((response) => {
+                this.castpersons = response.data
+            }).catch((error) => {
+                console.log(error);
+            })
+        },
         canvas() {
 
             var canvas = document.getElementById('canvas');
@@ -1045,7 +1107,7 @@ export default {
             var width = canvas.width;
             // canvas.height = width + 50;
             var height = canvas.height;
-            var percent = 10;
+            var percent = 11;
 
             var counter = 0;
 
