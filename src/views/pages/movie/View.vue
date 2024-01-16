@@ -668,7 +668,8 @@
                             <div class="card" v-for="person in castpersons.cast">
 
                                 <div class="card-body">
-                                    <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + person.profile_path" alt="">
+                                    <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + person.profile_path"
+                                        alt="">
                                 </div>
                                 <div class="card-footer">
                                     <router-link :to="'/person/view/' + person.id">{{ person.original_name }}</router-link>
@@ -694,7 +695,8 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
                                     data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane"
-                                    aria-selected="true">Reviews <span class="nav-link-count">32</span></button>
+                                    aria-selected="true">Reviews <span class="nav-link-count">{{ reviewsComment.length
+                                    }}</span></button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
@@ -708,23 +710,28 @@
                             <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
                                 aria-labelledby="home-tab" tabindex="0">
 
-                                <div class="review-content">
+                                <div v-for="commentreview in reviewsComment.slice(0, 3)" class="review-content">
 
                                     <div class="review-content-info">
 
-                                        <img src="../../../../public/images/person/aqua.jpg" alt="">
+                                        <img v-if="commentreview.author_details.avatar_path != null"
+                                            :src="'https://image.tmdb.org/t/p/w500/' + commentreview.author_details.avatar_path"
+                                            alt="">
+                                        <img v-else :src="'https://image.tmdb.org/t/p/w500/' + movieGetById.backdrop_path"
+                                            alt="">
 
                                         <div class="review-info">
-                                            <h3><a href="#">A review by GenerationofSwine</a></h3>
-                                            <span class="rating"><i class="bi bi-star-fill"></i> <span>10.0</span></span>
-                                            <h5>Written by GenerationofSwine on January 14, 2023</h5>
+                                            <h3><a href="#">A review by {{ commentreview.author }}</a></h3>
+                                            <span class="rating"><i class="bi bi-star-fill"></i> <span>{{
+                                                commentreview.author_details.rating ?
+                                                commentreview.author_details.rating : 0 }}</span></span>
+                                            <h5>Written by {{ commentreview.author }} on {{
+                                                commentreview.created_at.slice(0, 10) }}</h5>
                                         </div>
 
                                     </div>
 
-                                    I walked into this frightened that there would be too man characters and the result
-                                    would be an empty vacant shell of a movie that was pulled in so many different
-                                    directions it couldn't make sense of itself.
+                                    {{ commentreview.content.slice(0, 300) }}...
                                 </div>
 
                                 <p class="all-reviews">
@@ -738,16 +745,20 @@
                             <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
                                 tabindex="0">
 
-                                <div class="discussion">
+                                <div v-for="discussions in reviewsCommentdiscussions.slice(0, 3)" class="discussion">
 
                                     <div class="discussion-info-1">
-                                        <img loading="lazy" src="../../../../public/images/person/aqua.jpg" alt="">
+                                        <img v-if="discussions.author_details.avatar_path != null"
+                                            :src="'https://image.tmdb.org/t/p/w500/' + discussions.author_details.avatar_path"
+                                            alt="">
+                                        <img v-else :src="'https://image.tmdb.org/t/p/w500/' + movieGetById.backdrop_path"
+                                            alt="">
                                         <a href="">
-                                            2018: Which film hurt YOUR Rear End the most sitting in Cinemas this Year?
+                                            {{ discussions.content.slice(0, 50) }}
                                         </a>
                                     </div>
 
-                                    <div class="discussion-info-2">
+                                    <!-- <div class="discussion-info-2">
                                         <p>
                                             open
                                         </p>
@@ -757,7 +768,7 @@
                                         <p>
                                             16
                                         </p>
-                                    </div>
+                                    </div> -->
 
                                 </div>
 
@@ -789,17 +800,17 @@
                                         class="nav-link-count"> 4</span></button>
                             </li>
 
-                            <li class="nav-item" role="presentation">
+                            <!-- <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="media-tab-3" data-bs-toggle="tab" data-bs-target="#media-3"
                                     type="button" role="tab" aria-controls="media-3" aria-selected="false">Backdrops <span
                                         class="nav-link-count"> 44</span></button>
-                            </li>
+                            </li> -->
 
-                            <li class="nav-item" role="presentation">
+                            <!-- <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="media-tab-4" data-bs-toggle="tab" data-bs-target="#media-4"
                                     type="button" role="tab" aria-controls="media-4" aria-selected="false">Posters <span
                                         class="nav-link-count"> 190</span></button>
-                            </li>
+                            </li> -->
                         </ul>
                         <div class="tab-content" id="myTabContent">
 
@@ -807,22 +818,13 @@
                                 aria-labelledby="media-tab-1" tabindex="0">
                                 <div class="sss">
 
-                                    <div class="media-img-card">
+                                    <div v-for="image in movieImages" class="media-img-card">
 
-                                        <img src="../../../../public/images/person/avanger.jpg" alt="">
-
-                                    </div>
-
-                                    <div class="media-img-card">
-
-                                        <img src="../../../../public/images/person/avanger.jpg" alt="">
+                                        <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + image.file_path"
+                                            alt="">
 
                                     </div>
-                                    <div class="media-img-card">
 
-                                        <img src="../../../../public/images/person/avanger.jpg" alt="">
-
-                                    </div>
                                 </div>
                             </div>
 
@@ -831,27 +833,18 @@
 
                                 <div class="sss">
 
-                                    <div class="media-img-card">
+                                    <div v-for="video in movieVideos.slice(0, 6)" class="media-img-card">
 
-                                        <img src="../../../../public/images/person/avanger.jpg" alt="">
-
-                                    </div>
-
-                                    <div class="media-img-card">
-
-                                        <img src="../../../../public/images/person/avanger.jpg" alt="">
+                                        <iframe width="560" height="290" :src="'https://www.youtube.com/embed/' + video.key"
+                                            title="Movie Trailer" frameborder="0" allowfullscreen></iframe>
 
                                     </div>
-                                    <div class="media-img-card">
 
-                                        <img src="../../../../public/images/person/avanger.jpg" alt="">
-
-                                    </div>
                                 </div>
 
 
                             </div>
-
+                            <!-- 
                             <div class="tab-pane main-new-tab fade" id="media-3" role="tabpanel"
                                 aria-labelledby="media-tab-3" tabindex="0">
 
@@ -876,23 +869,23 @@
                                 </div>
 
 
-                            </div>
+                            </div> -->
 
-                            <div class="tab-pane main-new-tab fade" id="media-4" role="tabpanel"
+                            <!-- <div class="tab-pane main-new-tab fade" id="media-4" role="tabpanel"
                                 aria-labelledby="media-tab-4" tabindex="0">
 
                                 <div class="sss">
 
-                                    <div class="media-img-card-2">
+                                    <div v-for="popular in popularimages" class="media-img-card-2">
 
-                                        <img src="../../../../public/images/person/avangerpeople.jpg" alt="">
+                                        <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + popular.rent.logo_path" alt="">
 
                                     </div>
 
                                 </div>
 
 
-                            </div>
+                            </div> -->
 
                         </div>
 
@@ -1035,7 +1028,12 @@ export default {
         return {
             movieGetById: {},
             keywordstomovie: [],
-            castpersons: []
+            castpersons: [],
+            reviewsComment: [],
+            reviewsCommentdiscussions: [],
+            movieImages: [],
+            movieVideos: [],
+            // popularimages: [],
         }
     },
 
@@ -1044,6 +1042,11 @@ export default {
         this.movieFind();
         this.keywords();
         this.casts();
+        this.reviews();
+        this.discussions();
+        this.images();
+        this.videos();
+        // this.popular();
     },
 
     methods: {
@@ -1098,6 +1101,96 @@ export default {
                 console.log(error);
             })
         },
+        reviews() {
+
+            const options = {
+                method: 'GET',
+                url: `https://api.themoviedb.org/3/movie/${this.$route.params.id}/reviews?language=en-US&page=1`,
+                headers: {
+                    accept: 'application/json',
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMjRmMTMwZDhkMWRiOGUzYTFkOGQxZTJkZGEyZmIzYyIsInN1YiI6IjY1OTRmMWZiZDdhNzBhMTM1NzY4ZjhiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.geWveJFNg7mp1mk5if-2SWEdprOb23e6SoMibi8So3I'
+                }
+            }
+
+            axios.request(options).then((response) => {
+                this.reviewsComment = response.data.results
+            }).catch((error) => {
+                console.log(error);
+            })
+
+        },
+        discussions() {
+
+            const options = {
+                method: 'GET',
+                url: `https://api.themoviedb.org/3/movie/${this.$route.params.id}/reviews?language=en-US&page=1`,
+                headers: {
+                    accept: 'application/json',
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMjRmMTMwZDhkMWRiOGUzYTFkOGQxZTJkZGEyZmIzYyIsInN1YiI6IjY1OTRmMWZiZDdhNzBhMTM1NzY4ZjhiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.geWveJFNg7mp1mk5if-2SWEdprOb23e6SoMibi8So3I'
+                }
+            }
+
+            axios.request(options).then((response) => {
+                this.reviewsCommentdiscussions = response.data.results
+            }).catch((error) => {
+                console.log(error);
+            })
+
+        },
+        images() {
+
+            const options = {
+                method: 'GET',
+                url: `https://api.themoviedb.org/3/movie/${this.$route.params.id}/images`,
+                headers: {
+                    accept: 'application/json',
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMjRmMTMwZDhkMWRiOGUzYTFkOGQxZTJkZGEyZmIzYyIsInN1YiI6IjY1OTRmMWZiZDdhNzBhMTM1NzY4ZjhiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.geWveJFNg7mp1mk5if-2SWEdprOb23e6SoMibi8So3I'
+                }
+            }
+
+            axios.request(options).then((response) => {
+                this.movieImages = response.data.backdrops
+            }).catch((error) => {
+                console.log(error);
+            })
+
+        },
+        videos() {
+
+            const options = {
+                method: 'GET',
+                url: `https://api.themoviedb.org/3/movie/${this.$route.params.id}/videos?language=en-US`,
+                headers: {
+                    accept: 'application/json',
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMjRmMTMwZDhkMWRiOGUzYTFkOGQxZTJkZGEyZmIzYyIsInN1YiI6IjY1OTRmMWZiZDdhNzBhMTM1NzY4ZjhiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.geWveJFNg7mp1mk5if-2SWEdprOb23e6SoMibi8So3I'
+                }
+            }
+
+            axios.request(options).then((response) => {
+                this.movieVideos = response.data.results
+            }).catch((error) => {
+                console.log(error);
+            })
+
+        }
+        // popular() {
+        //     const options = {
+        //         method: 'GET',
+        //         url: `https://api.themoviedb.org/3/movie/${this.$route.params.id}/watch/providers`,
+        //         headers: {
+        //             accept: 'application/json',
+        //             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMjRmMTMwZDhkMWRiOGUzYTFkOGQxZTJkZGEyZmIzYyIsInN1YiI6IjY1OTRmMWZiZDdhNzBhMTM1NzY4ZjhiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.geWveJFNg7mp1mk5if-2SWEdprOb23e6SoMibi8So3I'
+        //         }
+        //     }
+
+        //     axios.request(options).then((response) => {
+        //         this.popularimages = response.data.results
+        //         console.log(response.data.results.rent.logo_path);
+        //     }).catch((error) => {
+        //         console.log(error);
+        //     })
+        // }
+        ,
         canvas() {
 
             var canvas = document.getElementById('canvas');
