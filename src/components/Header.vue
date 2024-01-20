@@ -7,9 +7,13 @@ import { RouterLink } from "vue-router"
 
 <template>
     <nav class="navbar navbar-expand-lg">
-        <div class="container ps-5">
+        <div class="container">
 
-            <router-link class="navbar-brand" to="/">Logo</router-link>
+            <router-link class="navbar-brand" to="/">
+                <img loading="lazy" style="width: 154px; height: 20px;" src="../../public/images/logo/logohome.svg"
+                    class="card-img-top">
+            </router-link>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

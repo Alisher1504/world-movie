@@ -3,8 +3,8 @@
 
 import axios from 'axios';
 import { RouterLink } from 'vue-router';
-import Movies from '../components/Movies.vue'
-import MovieModal from '../components/MovieModal.vue'
+import Movies from '@/components/Movies.vue'
+import MovieModal from '@/components/MovieModal.vue'
 
 export default {
     data() {
@@ -18,10 +18,7 @@ export default {
             trending: [],
             trendingTv: [],
             videoMoviePopular1: [],
-            // videoMoviePopulars2: [],
-            // videoMoviePopulars3: [],
-            // videoMoviePopulars4: [],
-            // videoMoviePopulars5: [],
+            searchQuery: '',
         }
     },
     mounted() {
@@ -34,10 +31,7 @@ export default {
         this.trendingMovie();
         this.trendingTvMovie();
         this.videoMoviePopular();
-        // this.videoMoviePopular2();
-        // this.videoMoviePopular3();
-        // this.videoMoviePopular4();
-        // this.videoMoviePopular5();
+        this.submitForm();
     },
     methods: {
         homeMovie() {
@@ -227,89 +221,17 @@ export default {
 
         },
 
-        // videoMoviePopular2() {
+        submitForm() {
 
-        //     const option = {
+          
+            if (this.searchQuery !== '') {
 
-        //         method: 'GET',
-        //         url: 'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=16',
-        //         headers: {
-        //             accept: 'application/json',
-        //             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMjRmMTMwZDhkMWRiOGUzYTFkOGQxZTJkZGEyZmIzYyIsInN1YiI6IjY1OTRmMWZiZDdhNzBhMTM1NzY4ZjhiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.geWveJFNg7mp1mk5if-2SWEdprOb23e6SoMibi8So3I'
-        //         }
+                this.$router.push({ name: 'searchResults', params: { name: this.searchQuery } });
 
-        //     };
+            }
 
-        //     axios.request(option).then((response) => {
-        //         this.videoMoviePopulars2 = response.data?.results
-        //     }).catch((error) => {
-         //       console.log(error);
-        //     })
+        }
 
-        // },
-
-        // videoMoviePopular3() {
-
-        //     const option = {
-
-        //         method: 'GET',
-        //         url: 'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=17',
-        //         headers: {
-        //             accept: 'application/json',
-        //             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMjRmMTMwZDhkMWRiOGUzYTFkOGQxZTJkZGEyZmIzYyIsInN1YiI6IjY1OTRmMWZiZDdhNzBhMTM1NzY4ZjhiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.geWveJFNg7mp1mk5if-2SWEdprOb23e6SoMibi8So3I'
-        //         }
-
-        //     };
-
-        //     axios.request(option).then((response) => {
-        //         this.videoMoviePopulars3 = response.data?.results
-        //     }).catch((error) => {
-        //        console.log(error);
-        //     })
-
-        // },
-
-        // videoMoviePopular4() {
-
-        //     const option = {
-
-        //         method: 'GET',
-        //         url: 'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=18',
-        //         headers: {
-        //             accept: 'application/json',
-        //             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMjRmMTMwZDhkMWRiOGUzYTFkOGQxZTJkZGEyZmIzYyIsInN1YiI6IjY1OTRmMWZiZDdhNzBhMTM1NzY4ZjhiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.geWveJFNg7mp1mk5if-2SWEdprOb23e6SoMibi8So3I'
-        //         }
-
-        //     };
-
-        //     axios.request(option).then((response) => {
-        //         this.videoMoviePopulars4 = response.data?.results
-        //     }).catch((error) => {
-        //        console.log(error);
-        //     })
-
-        // },
-
-        // videoMoviePopular5() {
-
-        //     const option = {
-
-        //         method: 'GET',
-        //         url: 'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=19',
-        //         headers: {
-        //             accept: 'application/json',
-        //             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMjRmMTMwZDhkMWRiOGUzYTFkOGQxZTJkZGEyZmIzYyIsInN1YiI6IjY1OTRmMWZiZDdhNzBhMTM1NzY4ZjhiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.geWveJFNg7mp1mk5if-2SWEdprOb23e6SoMibi8So3I'
-        //         }
-
-        //     };
-
-        //     axios.request(option).then((response) => {
-        //         this.videoMoviePopulars5 = response.data?.results
-        //     }).catch((error) => {
-        //        console.log(error);
-        //     })
-
-        // },
 
     },
 
@@ -341,12 +263,12 @@ export default {
                     </div>
 
                     <div class="search col-12">
-                        <form action="#">
+                        <form @submit.prevent="submitForm">
 
                             <div class="search_form">
-                                <input type="text" class="search-input"
+                                <input type="text" class="search-input" v-model="searchQuery"
                                     placeholder="Search for a movie, tv show, person......">
-                                <button>Search</button>
+                                <button type="submit">Search</button>
                             </div>
 
                         </form>
@@ -443,7 +365,7 @@ export default {
 
                             <div class="card-content">
 
-                                <MovieModal v-for="(movie, index) in forRent" :movie="movie" />
+                                <MovieModal v-for="(movie, index) in forRent" :key="index" :movie="movie" />
 
                             </div>
 
@@ -454,7 +376,7 @@ export default {
 
                             <div class="card-content">
 
-                                <MovieModal v-for="(movie, index) in populationmove" :movie="movie" />
+                                <MovieModal v-for="(movie, index) in populationmove" :key="index" :movie="movie" />
 
 
                             </div>
@@ -466,7 +388,7 @@ export default {
 
                             <div class="card-content">
 
-                                <MovieModal v-for="(movie, index) in populationMovie" :movie="movie" />
+                                <MovieModal v-for="(movie, index) in populationMovie" :key="index" :movie="movie" />
 
 
                             </div>
@@ -478,7 +400,7 @@ export default {
 
                             <div class="card-content">
 
-                                <MovieModal v-for="(movie, index) in streaming" :movie="movie" />
+                                <MovieModal v-for="(movie, index) in streaming" :key="index" :movie="movie" />
 
                             </div>
 
@@ -489,7 +411,7 @@ export default {
 
                             <div class="card-content">
 
-                                <MovieModal v-for="(movie, index) in videoMoviePopular1" :movie="movie" />
+                                <MovieModal v-for="(movie, index) in videoMoviePopular1" :key="index" :movie="movie" />
 
                             </div>
 
