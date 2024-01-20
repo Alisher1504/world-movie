@@ -12,25 +12,25 @@ const router = createRouter({
     {
       path: '/people',
       name: 'people',
-      component: () => import('../views/pages/people/People.vue')
+      component: () => import('@/views/pages/people/People.vue')
     },
 
     {
       path: '/person/view/:id',
       name: 'person',
-      component: () => import('../views/pages/people/View.vue')
+      component: () => import('@/views/pages/people/View.vue')
     },
 
     {
       path: '/movie/view/:id',
       name: 'movie',
-      component: () => import('../views/pages/movie/view.vue')
+      component: () => import('@/views/pages/movie/view.vue')
     },
 
     {
       path: '/search/result/:name',
       name: 'searchResults',
-      component: () => import('../components/Search.vue')
+      component: () => import('@/components/Search.vue')
     }
    
   ],
