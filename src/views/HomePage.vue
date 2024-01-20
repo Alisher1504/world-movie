@@ -3,6 +3,8 @@
 
 import axios from 'axios';
 import { RouterLink } from 'vue-router';
+import Movies from '../components/Movies.vue'
+import MovieModal from '../components/MovieModal.vue'
 
 export default {
     data() {
@@ -309,6 +311,13 @@ export default {
 
         // },
 
+    },
+
+    components: {
+
+        Movies,
+        MovieModal
+
     }
 }
 
@@ -374,44 +383,17 @@ export default {
 
                         <div class="card-content ">
 
-                            <div v-for="movie in populationmove" class="card" :key="movie.id">
-                                <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
-                                    class="card-img-top" :alt="movie.title">
+                            <Movies v-for="movie in populationmove" :key="movie.id" :movie="movie" />
 
-                                <div class="card-body">
-                                    <h2>
-                                        <router-link :to="'movie/view/' + movie.id">
-                                            {{ movie.original_title }}
-                                        </router-link>
-                                    </h2>
-                                    <span>{{ movie.release_date }}</span>
-                                </div>
-                            </div>
                         </div>
-
-
 
                     </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"
                         tabindex="0">
 
                         <div class="card-content ">
-                            <div v-for="movie in populationMovie" :key="movie.id" class="card">
-                                <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
-                                    class="card-img-top" :alt="movie.title">
-                                <!-- <div class="chart" id="graph" data-percent="88"></div> -->
 
-                                <div class="card-body">
-                                    <h2>
-                                        <router-link :to="'movie/view/' + movie.id">
-                                            {{ movie.original_title }}
-                                        </router-link>
-                                    </h2>
-                                    <span>{{ movie.release_date }}</span>
-
-                                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                                </div>
-                            </div>
+                            <Movies v-for="movie in populationMovie" :key="movie.id" :movie="movie" />
 
                         </div>
 
@@ -461,48 +443,7 @@ export default {
 
                             <div class="card-content">
 
-                                <div v-for="(movie, index) in videoMoviePopular1" :key="index" class="card">
-                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path"
-                                        class="card-img-top trailer-image" alt="..." data-bs-toggle="modal"
-                                        :data-bs-target="'#exampleModal' + index" />
-
-                                    <div class="video-play" data-bs-toggle="modal"
-                                        :data-bs-target="'#exampleModal' + index">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor"
-                                            class="bi bi-play-fill" viewBox="0 0 16 16">
-                                            <path
-                                                d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"
-                                                fill="#fff" />
-                                        </svg>
-                                    </div>
-
-                                    <div class="card-body">
-                                        <h2 class="card-text text-center">
-                                            <router-link :to="'movie/view/' + movie.id">
-                                                {{ movie.original_title }}
-                                            </router-link>
-                                        </h2>
-                                        <!-- <h3 class="text-center">"One of the Best Films of the Year"</h3> -->
-                                    </div>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" :id="'exampleModal' + index" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-body video-trailer-modal">
-                                                    <iframe width="100%" height="100%"
-                                                        :src="'https://www.youtube.com/embed/' + movie.videoId"
-                                                        title="YouTube video player" frameborder="0"
-                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                                        allowfullscreen></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Modal -->
-                                </div>
-
+                                <MovieModal v-for="(movie, index) in forRent" :key="index" :movie="movie" />
 
                             </div>
 
@@ -513,45 +454,8 @@ export default {
 
                             <div class="card-content">
 
-                                <div v-for="(movie, index) in populationmove" :key="index" class="card">
-                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path"
-                                        class="card-img-top trailer-image" alt="..." data-bs-toggle="modal"
-                                        :data-bs-target="'#exampleModal' + index" />
+                                <MovieModal v-for="(movie, index) in populationmove" :key="index" :movie="movie" />
 
-                                    <div class="video-play" data-bs-toggle="modal"
-                                        :data-bs-target="'#exampleModal' + index">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor"
-                                            class="bi bi-play-fill" viewBox="0 0 16 16">
-                                            <path
-                                                d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"
-                                                fill="#fff" />
-                                        </svg>
-                                    </div>
-
-                                    <div class="card-body">
-                                        <h2 class="card-text text-center"><router-link :to="'movie/view/' + movie.id">
-                                                {{ movie.original_title }}
-                                            </router-link></h2>
-                                        <!-- <h3 class="text-center">"One of the Best Films of the Year"</h3> -->
-                                    </div>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" :id="'exampleModal' + index" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-body video-trailer-modal">
-                                                    <iframe width="100%" height="100%"
-                                                        :src="'https://www.youtube.com/embed/' + movie.videoId"
-                                                        title="YouTube video player" frameborder="0"
-                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                                        allowfullscreen></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Modal -->
-                                </div>
 
                             </div>
 
@@ -562,47 +466,8 @@ export default {
 
                             <div class="card-content">
 
-                                <div v-for="(movie, index) in populationMovie" :key="index" class="card">
-                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path"
-                                        class="card-img-top trailer-image" alt="..." data-bs-toggle="modal"
-                                        :data-bs-target="'#exampleModal' + index" />
+                                <MovieModal v-for="(movie, index) in populationMovie" :key="index" :movie="movie" />
 
-                                    <div class="video-play" data-bs-toggle="modal"
-                                        :data-bs-target="'#exampleModal' + index">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor"
-                                            class="bi bi-play-fill" viewBox="0 0 16 16">
-                                            <path
-                                                d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"
-                                                fill="#fff" />
-                                        </svg>
-                                    </div>
-
-                                    <div class="card-body">
-                                        <h2 class="card-text text-center">
-                                            <router-link :to="'movie/view/' + movie.id">
-                                                {{ movie.original_title }}
-                                            </router-link>
-                                        </h2>
-                                        <!-- <h3 class="text-center">"One of the Best Films of the Year"</h3> -->
-                                    </div>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" :id="'exampleModal' + index" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-body video-trailer-modal">
-                                                    <iframe width="100%" height="100%"
-                                                        :src="'https://www.youtube.com/embed/' + movie.videoId"
-                                                        title="YouTube video player" frameborder="0"
-                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                                        allowfullscreen></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Modal -->
-                                </div>
 
                             </div>
 
@@ -613,47 +478,7 @@ export default {
 
                             <div class="card-content">
 
-                                <div v-for="(movie, index) in streaming" :key="index" class="card">
-                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path"
-                                        class="card-img-top trailer-image" alt="..." data-bs-toggle="modal"
-                                        :data-bs-target="'#exampleModal' + index" />
-
-                                    <div class="video-play" data-bs-toggle="modal"
-                                        :data-bs-target="'#exampleModal' + index">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor"
-                                            class="bi bi-play-fill" viewBox="0 0 16 16">
-                                            <path
-                                                d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"
-                                                fill="#fff" />
-                                        </svg>
-                                    </div>
-
-                                    <div class="card-body">
-                                        <h2 class="card-text text-center">
-                                            <router-link :to="'movie/view/' + movie.id">
-                                                {{ movie.original_title }}
-                                            </router-link>
-                                        </h2>
-                                        <!-- <h3 class="text-center">"One of the Best Films of the Year"</h3> -->
-                                    </div>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" :id="'exampleModal' + index" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-body video-trailer-modal">
-                                                    <iframe width="100%" height="100%"
-                                                        :src="'https://www.youtube.com/embed/' + movie.videoId"
-                                                        title="YouTube video player" frameborder="0"
-                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                                        allowfullscreen></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Modal -->
-                                </div>
+                                <MovieModal v-for="(movie, index) in streaming" :key="index" :movie="movie" />
 
                             </div>
 
@@ -664,47 +489,7 @@ export default {
 
                             <div class="card-content">
 
-                                <div v-for="(movie, index) in forRent" :key="index" class="card">
-                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path"
-                                        class="card-img-top trailer-image" alt="..." data-bs-toggle="modal"
-                                        :data-bs-target="'#exampleModal' + index" />
-
-                                    <div class="video-play" data-bs-toggle="modal"
-                                        :data-bs-target="'#exampleModal' + index">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor"
-                                            class="bi bi-play-fill" viewBox="0 0 16 16">
-                                            <path
-                                                d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"
-                                                fill="#fff" />
-                                        </svg>
-                                    </div>
-
-                                    <div class="card-body">
-                                        <h2 class="card-text text-center">
-                                            <router-link :to="'movie/view/' + movie.id">
-                                                {{ movie.original_title }}
-                                            </router-link>
-                                        </h2>
-                                        <!-- <h3 class="text-center">"One of the Best Films of the Year"</h3> -->
-                                    </div>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" :id="'exampleModal' + index" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-body video-trailer-modal">
-                                                    <iframe width="100%" height="100%"
-                                                        :src="'https://www.youtube.com/embed/' + movie.videoId"
-                                                        title="YouTube video player" frameborder="0"
-                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                                        allowfullscreen></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Modal -->
-                                </div>
+                                <MovieModal v-for="(movie, index) in videoMoviePopular1" :key="index" :movie="movie" />
 
                             </div>
 
@@ -747,23 +532,8 @@ export default {
                         aria-labelledby="popular-tab-1" tabindex="0">
 
                         <div class="card-content ">
-                            <div v-for="movie in streaming" :key="movie.id" class="card">
-                                <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
-                                    class="card-img-top" :alt="movie.title">
-                                <!-- <div class="chart" id="graph" data-percent="88"></div> -->
 
-                                <div class="card-body">
-                                    <h2>
-                                        <router-link :to="'movie/view/' + movie.id">
-                                            {{ movie.original_title }}
-                                        </router-link>
-                                    </h2>
-                                    <span>{{ movie.release_date }}</span>
-
-                                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                                </div>
-                            </div>
-
+                            <Movies v-for="movie in streaming" :key="movie.id" :movie="movie" />
 
                         </div>
 
@@ -773,22 +543,9 @@ export default {
 
                         <div class="card-content">
                             <div class="card-content ">
-                                <div v-for="movie in onTv" :key="movie.id" class="card">
-                                    <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
-                                        class="card-img-top" :alt="movie.title">
-                                    <!-- <div class="chart" id="graph" data-percent="88"></div> -->
 
-                                    <div class="card-body">
-                                        <h2>
-                                            <router-link :to="'movie/view/' + movie.id">
-                                                {{ movie.original_title }}
-                                            </router-link>
-                                        </h2>
-                                        <span>{{ movie.release_date }}</span>
+                                <Movies v-for="movie in onTv" :key="movie.id" :movie="movie" />
 
-                                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                                    </div>
-                                </div>
 
                             </div>
                         </div>
@@ -799,22 +556,8 @@ export default {
 
                         <div class="card-content">
                             <div class="card-content ">
-                                <div v-for="movie in forRent" :key="movie.id" class="card">
-                                    <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
-                                        class="card-img-top" :alt="movie.title">
-                                    <!-- <div class="chart" id="graph" data-percent="88"></div> -->
 
-                                    <div class="card-body">
-                                        <h2>
-                                            <router-link :to="'movie/view/' + movie.id">
-                                                {{ movie.original_title }}
-                                            </router-link>
-                                        </h2>
-                                        <span>{{ movie.release_date }}</span>
-
-                                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                                    </div>
-                                </div>
+                                <Movies v-for="movie in forRent" :key="movie.id" :movie="movie" />
 
                             </div>
                         </div>
@@ -825,22 +568,8 @@ export default {
 
                         <div class="card-content">
                             <div class="card-content ">
-                                <div v-for="movie in inTheater" :key="movie.id" class="card">
-                                    <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
-                                        class="card-img-top" :alt="movie.title">
-                                    <!-- <div class="chart" id="graph" data-percent="88"></div> -->
 
-                                    <div class="card-body">
-                                        <h2>
-                                            <router-link :to="'movie/view/' + movie.id">
-                                                {{ movie.original_title }}
-                                            </router-link>
-                                        </h2>
-                                        <span>{{ movie.release_date }}</span>
-
-                                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                                    </div>
-                                </div>
+                                <Movies v-for="movie in inTheater" :key="movie.id" :movie="movie" />
 
                             </div>
                         </div>
@@ -880,23 +609,8 @@ export default {
                         aria-labelledby="nav-movie-tab-1" tabindex="0">
 
                         <div class="card-content ">
-                            <div v-for="movie in trending" :key="movie.id" class="card">
-                                <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
-                                    class="card-img-top" :alt="movie.title">
-                                <!-- <div class="chart" id="graph" data-percent="88"></div> -->
 
-                                <div class="card-body">
-                                    <h2>
-                                        <router-link :to="'movie/view/' + movie.id">
-                                            {{ movie.original_title }}
-                                        </router-link>
-                                    </h2>
-                                    <span>{{ movie.release_date }}</span>
-
-                                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                                </div>
-                            </div>
-
+                            <Movies v-for="movie in trending" :key="movie.id" :movie="movie" />
 
                         </div>
 
@@ -907,23 +621,8 @@ export default {
                         tabindex="0">
 
                         <div class="card-content ">
-                            <div v-for="movie in trendingTv" :key="movie.id" class="card">
-                                <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
-                                    class="card-img-top" :alt="movie.title">
-                                <!-- <div class="chart" id="graph" data-percent="88"></div> -->
 
-                                <div class="card-body">
-                                    <h2>
-                                        <router-link :to="'movie/view/' + movie.id">
-                                            {{ movie.original_title }}
-                                        </router-link>
-                                    </h2>
-                                    <span>{{ movie.release_date }}</span>
-
-                                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                                </div>
-                            </div>
-
+                            <Movies v-for="movie in trendingTv" :key="movie.id" :movie="movie" />
 
                         </div>
 

@@ -61,7 +61,8 @@ export default {
                     <div v-for="person in peoplemove" class="col-md-3">
                         <div class="card">
                             <div class="card-body">
-                                <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + person.profile_path" alt="">
+                                <img v-if="person.profile_path" loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + person.profile_path" alt="">
+                                <img v-else loading="lazy" style="object-fit: contain;" src="../../../../public/images/default.webp" alt="">
                             </div>
                             <div class="card-footer bg-white p-2">
                                 <p class="name">

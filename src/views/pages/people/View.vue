@@ -240,7 +240,10 @@
                 <div class="col-md-3">
 
                     <div class="image-content">
-                        <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + person.profile_path" alt="">
+                        <img v-if="person.profile_path" loading="lazy"
+                            :src="'https://image.tmdb.org/t/p/w500/' + person.profile_path" alt="">
+                        <img v-else loading="lazy" style="object-fit: contain;" src="../../../../public/images/default.webp"
+                            alt="">
                     </div>
 
                     <div class="social-set my-4">
@@ -313,11 +316,13 @@
                             <div v-for="(movies, index) in slicedMovies" :key="index" class="card">
 
                                 <div class="card-body">
-                                    <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + movies.poster_path"
+                                    <img v-if="movies.poster_path" loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + movies.poster_path"
                                         alt="">
+                                    <img v-else loading="lazy" style="object-fit: contain;"
+                                        src="../../../../public/images/default.webp" alt="">
                                 </div>
                                 <div class="card-footer">
-                                    <a href="#">{{ movies.title }}</a>
+                                    <router-link :to="'/movie/view/' + movies.id">{{ movies.title }}</router-link>
                                 </div>
 
                             </div>
@@ -334,7 +339,10 @@
 
                                 <div class="card">
                                     <div class="card-body">
-                                        <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + image.file_path" alt="">
+                                        <img v-if="image.file_path" loading="lazy"
+                                            :src="'https://image.tmdb.org/t/p/w500/' + image.file_path" alt="">
+                                        <img v-else loading="lazy" style="object-fit: contain;"
+                                            src="../../../../public/images/default.webp" alt="">
                                     </div>
                                     <div class="card-footer">
 
