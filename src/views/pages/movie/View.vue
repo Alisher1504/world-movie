@@ -385,7 +385,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
     border-radius: 7px;
     margin-top: 10px;
-    background-image: url('../../../../public/images/person/avanger.jpg');
+
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -545,6 +545,11 @@
     color: #000;
     font-size: .9em;
 }
+
+.trailer-modal{ 
+    margin-top: 10%;
+    margin-left: -10%;
+}
 </style>
 
 <template>
@@ -559,8 +564,7 @@
 
                         <div class="movie-image">
 
-                            <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + movieGetById.backdrop_path"
-                                alt="">
+                            <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + movieGetById.poster_path" alt="">
 
                         </div>
 
@@ -589,7 +593,6 @@
                                 <!-- <div class="time">
                                     23442
                                 </div> -->
-
                             </div>
 
                             <div class="auto-actions mt-3">
@@ -607,14 +610,14 @@
                                             class="bi bi-play-fill"></i> Play Trailer</a>
                                 </div>
 
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                <div class="modal fade trailer-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                     aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
 
-                                            <div class="modal-body">
-                                                ...
-                                            </div>
+                                                <iframe v-for="video in movieVideos.slice(0, 1)" width="900" height="500"
+                                                    :src="'https://www.youtube.com/embed/' + video.key"
+                                                    title="Movie Trailer" frameborder="0" allowfullscreen></iframe>
                                         </div>
                                     </div>
                                 </div>
@@ -791,13 +794,14 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="media-tab-1" data-bs-toggle="tab"
                                     data-bs-target="#media-1" type="button" role="tab" aria-controls="media-1"
-                                    aria-selected="true">Most Popular <span class="nav-link-count">32</span></button>
+                                    aria-selected="true">Most Popular <span class="nav-link-count">{{ movieImages.slice(0,
+                                        20).length }}</span></button>
                             </li>
 
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="media-tab-2" data-bs-toggle="tab" data-bs-target="#media-2"
                                     type="button" role="tab" aria-controls="media-2" aria-selected="false">Videos <span
-                                        class="nav-link-count"> 4</span></button>
+                                        class="nav-link-count">{{ movieVideos.slice(0, 6).length }}</span></button>
                             </li>
 
                             <!-- <li class="nav-item" role="presentation">
@@ -818,7 +822,7 @@
                                 aria-labelledby="media-tab-1" tabindex="0">
                                 <div class="sss">
 
-                                    <div v-for="image in movieImages" class="media-img-card">
+                                    <div v-for="image in movieImages.slice(0, 20)" class="media-img-card">
 
                                         <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + image.file_path"
                                             alt="">
@@ -893,17 +897,17 @@
 
                     <hr class="my-4">
 
-                    <div class="collection-info">
+                    <div class="collection-info"
+                        v-bind:style="{ backgroundImage: 'url(\'https://image.tmdb.org/t/p/w500/' + movieGetById.backdrop_path + '\')' }">
+
 
                         <div class="collection">
 
                             <div class="info">
 
-                                <h2>Part of the The Avengers Collection</h2>
+                                <h2>Part of the {{ movieGetById.original_title }} Collection</h2>
 
                                 <p>
-                                    Includes The Avengers, Avengers: Age of Ultron, Avengers: Infinity War, and Avengers:
-                                    Endgame
                                 </p>
 
                                 <a href="#">
@@ -924,15 +928,18 @@
 
                         <div class="recomendation-content">
 
-                            <div class="card">
+                            <div v-for="recomend in recomendvideo" class="card">
                                 <div class="card-body">
-                                    <img src="../../../../public/images/person/avanger.jpg" alt="">
+                                    <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + recomend.backdrop_path"
+                                        alt="">
                                 </div>
                                 <div class="card-footer">
-                                    <a href="#">name</a>
-                                    <span>69%</span>
+                                    <router-link :to="'/movie/view/' + recomend.id">{{ recomend.original_title.slice(0, 15)
+                                    }}...</router-link>
+                                    <span>{{ (recomend.vote_average * 10).toFixed(2) }}%</span>
                                 </div>
                             </div>
+
 
                         </div>
 
@@ -1033,6 +1040,8 @@ export default {
             reviewsCommentdiscussions: [],
             movieImages: [],
             movieVideos: [],
+            recomendvideo: [],
+            findCanvasResultGetById: 0,
             // popularimages: [],
         }
     },
@@ -1046,6 +1055,7 @@ export default {
         this.discussions();
         this.images();
         this.videos();
+        this.recomindation();
         // this.popular();
     },
 
@@ -1064,6 +1074,8 @@ export default {
 
             axios.request(options).then((response) => {
                 this.movieGetById = response.data
+                this.findCanvasResultGetById = this.movieGetById.vote_average
+                console.log(this.findCanvasResultGetById);
             }).catch((error) => {
                 console.log(error);
             })
@@ -1172,25 +1184,26 @@ export default {
                 console.log(error);
             })
 
-        }
-        // popular() {
-        //     const options = {
-        //         method: 'GET',
-        //         url: `https://api.themoviedb.org/3/movie/${this.$route.params.id}/watch/providers`,
-        //         headers: {
-        //             accept: 'application/json',
-        //             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMjRmMTMwZDhkMWRiOGUzYTFkOGQxZTJkZGEyZmIzYyIsInN1YiI6IjY1OTRmMWZiZDdhNzBhMTM1NzY4ZjhiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.geWveJFNg7mp1mk5if-2SWEdprOb23e6SoMibi8So3I'
-        //         }
-        //     }
+        },
+        recomindation() {
 
-        //     axios.request(options).then((response) => {
-        //         this.popularimages = response.data.results
-        //         console.log(response.data.results.rent.logo_path);
-        //     }).catch((error) => {
-        //         console.log(error);
-        //     })
-        // }
-        ,
+            const options = {
+                method: 'GET',
+                url: `https://api.themoviedb.org/3/movie/${this.$route.params.id}/recommendations?language=en-US&page=1`,
+                headers: {
+                    accept: 'application/json',
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMjRmMTMwZDhkMWRiOGUzYTFkOGQxZTJkZGEyZmIzYyIsInN1YiI6IjY1OTRmMWZiZDdhNzBhMTM1NzY4ZjhiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.geWveJFNg7mp1mk5if-2SWEdprOb23e6SoMibi8So3I'
+                }
+            };
+
+            axios.request(options).then((response) => {
+                this.recomendvideo = response.data.results
+                console.log(this.recomendvideo);
+            }).catch((error) => {
+                console.log(error);
+            })
+
+        },
         canvas() {
 
             var canvas = document.getElementById('canvas');
@@ -1200,7 +1213,7 @@ export default {
             var width = canvas.width;
             // canvas.height = width + 50;
             var height = canvas.height;
-            var percent = 11;
+            let percent = this.findCanvasResultGetById;
 
             var counter = 0;
 
@@ -1235,8 +1248,24 @@ export default {
                     setTimeout(draw, 20);
                 }
             }, 20);
-        }
-    }
+        },
 
+
+    },
+    watch: {
+        '$route.params.id': {
+            handler: function (newValue, oldValue) {
+                this.keywords();
+                this.casts();
+                this.reviews();
+                this.discussions();
+                this.images();
+                this.videos();
+                this.recomindation();
+                this.movieFind();
+            },
+            immediate: true
+        }
+    },
 }
 </script>

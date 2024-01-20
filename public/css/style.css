@@ -294,6 +294,7 @@ span {
     max-width: 300px;
     height: calc(300px/1.78);
     cursor: pointer;
+    object-fit: cover;
 
 }
 

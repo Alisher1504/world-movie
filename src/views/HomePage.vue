@@ -16,6 +16,10 @@ export default {
             trending: [],
             trendingTv: [],
             videoMoviePopular1: [],
+            // videoMoviePopulars2: [],
+            // videoMoviePopulars3: [],
+            // videoMoviePopulars4: [],
+            // videoMoviePopulars5: [],
         }
     },
     mounted() {
@@ -28,6 +32,10 @@ export default {
         this.trendingMovie();
         this.trendingTvMovie();
         this.videoMoviePopular();
+        // this.videoMoviePopular2();
+        // this.videoMoviePopular3();
+        // this.videoMoviePopular4();
+        // this.videoMoviePopular5();
     },
     methods: {
         homeMovie() {
@@ -217,6 +225,90 @@ export default {
 
         },
 
+        // videoMoviePopular2() {
+
+        //     const option = {
+
+        //         method: 'GET',
+        //         url: 'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=16',
+        //         headers: {
+        //             accept: 'application/json',
+        //             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMjRmMTMwZDhkMWRiOGUzYTFkOGQxZTJkZGEyZmIzYyIsInN1YiI6IjY1OTRmMWZiZDdhNzBhMTM1NzY4ZjhiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.geWveJFNg7mp1mk5if-2SWEdprOb23e6SoMibi8So3I'
+        //         }
+
+        //     };
+
+        //     axios.request(option).then((response) => {
+        //         this.videoMoviePopulars2 = response.data?.results
+        //     }).catch((error) => {
+        //         console.log(error);
+        //     })
+
+        // },
+
+        // videoMoviePopular3() {
+
+        //     const option = {
+
+        //         method: 'GET',
+        //         url: 'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=17',
+        //         headers: {
+        //             accept: 'application/json',
+        //             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMjRmMTMwZDhkMWRiOGUzYTFkOGQxZTJkZGEyZmIzYyIsInN1YiI6IjY1OTRmMWZiZDdhNzBhMTM1NzY4ZjhiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.geWveJFNg7mp1mk5if-2SWEdprOb23e6SoMibi8So3I'
+        //         }
+
+        //     };
+
+        //     axios.request(option).then((response) => {
+        //         this.videoMoviePopulars3 = response.data?.results
+        //     }).catch((error) => {
+        //         console.log(error);
+        //     })
+
+        // },
+
+        // videoMoviePopular4() {
+
+        //     const option = {
+
+        //         method: 'GET',
+        //         url: 'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=18',
+        //         headers: {
+        //             accept: 'application/json',
+        //             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMjRmMTMwZDhkMWRiOGUzYTFkOGQxZTJkZGEyZmIzYyIsInN1YiI6IjY1OTRmMWZiZDdhNzBhMTM1NzY4ZjhiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.geWveJFNg7mp1mk5if-2SWEdprOb23e6SoMibi8So3I'
+        //         }
+
+        //     };
+
+        //     axios.request(option).then((response) => {
+        //         this.videoMoviePopulars4 = response.data?.results
+        //     }).catch((error) => {
+        //         console.log(error);
+        //     })
+
+        // },
+
+        // videoMoviePopular5() {
+
+        //     const option = {
+
+        //         method: 'GET',
+        //         url: 'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=19',
+        //         headers: {
+        //             accept: 'application/json',
+        //             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMjRmMTMwZDhkMWRiOGUzYTFkOGQxZTJkZGEyZmIzYyIsInN1YiI6IjY1OTRmMWZiZDdhNzBhMTM1NzY4ZjhiNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.geWveJFNg7mp1mk5if-2SWEdprOb23e6SoMibi8So3I'
+        //         }
+
+        //     };
+
+        //     axios.request(option).then((response) => {
+        //         this.videoMoviePopulars5 = response.data?.results
+        //     }).catch((error) => {
+        //         console.log(error);
+        //     })
+
+        // },
+
     }
 }
 
@@ -226,7 +318,6 @@ export default {
 </script>
 
 <template>
-    
     <section>
         <!-- {{ populationmove?.results }} -->
         <div class="container">
@@ -312,9 +403,9 @@ export default {
 
                                 <div class="card-body">
                                     <h2>
-                                        <a href="#">
+                                        <router-link :to="'movie/view/' + movie.id">
                                             {{ movie.original_title }}
-                                        </a>
+                                        </router-link>
                                     </h2>
                                     <span>{{ movie.release_date }}</span>
 
@@ -371,7 +462,7 @@ export default {
                             <div class="card-content">
 
                                 <div v-for="(movie, index) in videoMoviePopular1" :key="index" class="card">
-                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path"
                                         class="card-img-top trailer-image" alt="..." data-bs-toggle="modal"
                                         :data-bs-target="'#exampleModal' + index" />
 
@@ -386,8 +477,12 @@ export default {
                                     </div>
 
                                     <div class="card-body">
-                                        <h2 class="card-text text-center"><a href="#">The Color Purple</a></h2>
-                                        <h3 class="text-center">"One of the Best Films of the Year"</h3>
+                                        <h2 class="card-text text-center">
+                                            <router-link :to="'movie/view/' + movie.id">
+                                                {{ movie.original_title }}
+                                            </router-link>
+                                        </h2>
+                                        <!-- <h3 class="text-center">"One of the Best Films of the Year"</h3> -->
                                     </div>
 
                                     <!-- Modal -->
@@ -418,8 +513,8 @@ export default {
 
                             <div class="card-content">
 
-                                <div v-for="(movie, index) in videoMoviePopular1" :key="index" class="card">
-                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+                                <div v-for="(movie, index) in populationmove" :key="index" class="card">
+                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path"
                                         class="card-img-top trailer-image" alt="..." data-bs-toggle="modal"
                                         :data-bs-target="'#exampleModal' + index" />
 
@@ -434,8 +529,10 @@ export default {
                                     </div>
 
                                     <div class="card-body">
-                                        <h2 class="card-text text-center"><a href="#">The Color Purple</a></h2>
-                                        <h3 class="text-center">"One of the Best Films of the Year"</h3>
+                                        <h2 class="card-text text-center"><router-link :to="'movie/view/' + movie.id">
+                                                {{ movie.original_title }}
+                                            </router-link></h2>
+                                        <!-- <h3 class="text-center">"One of the Best Films of the Year"</h3> -->
                                     </div>
 
                                     <!-- Modal -->
@@ -465,8 +562,8 @@ export default {
 
                             <div class="card-content">
 
-                                <div v-for="(movie, index) in videoMoviePopular1" :key="index" class="card">
-                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+                                <div v-for="(movie, index) in populationMovie" :key="index" class="card">
+                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path"
                                         class="card-img-top trailer-image" alt="..." data-bs-toggle="modal"
                                         :data-bs-target="'#exampleModal' + index" />
 
@@ -481,8 +578,12 @@ export default {
                                     </div>
 
                                     <div class="card-body">
-                                        <h2 class="card-text text-center"><a href="#">The Color Purple</a></h2>
-                                        <h3 class="text-center">"One of the Best Films of the Year"</h3>
+                                        <h2 class="card-text text-center">
+                                            <router-link :to="'movie/view/' + movie.id">
+                                                {{ movie.original_title }}
+                                            </router-link>
+                                        </h2>
+                                        <!-- <h3 class="text-center">"One of the Best Films of the Year"</h3> -->
                                     </div>
 
                                     <!-- Modal -->
@@ -512,8 +613,8 @@ export default {
 
                             <div class="card-content">
 
-                                <div v-for="(movie, index) in videoMoviePopular1" :key="index" class="card">
-                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+                                <div v-for="(movie, index) in streaming" :key="index" class="card">
+                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path"
                                         class="card-img-top trailer-image" alt="..." data-bs-toggle="modal"
                                         :data-bs-target="'#exampleModal' + index" />
 
@@ -528,8 +629,12 @@ export default {
                                     </div>
 
                                     <div class="card-body">
-                                        <h2 class="card-text text-center"><a href="#">The Color Purple</a></h2>
-                                        <h3 class="text-center">"One of the Best Films of the Year"</h3>
+                                        <h2 class="card-text text-center">
+                                            <router-link :to="'movie/view/' + movie.id">
+                                                {{ movie.original_title }}
+                                            </router-link>
+                                        </h2>
+                                        <!-- <h3 class="text-center">"One of the Best Films of the Year"</h3> -->
                                     </div>
 
                                     <!-- Modal -->
@@ -559,8 +664,8 @@ export default {
 
                             <div class="card-content">
 
-                                <div v-for="(movie, index) in videoMoviePopular1" :key="index" class="card">
-                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+                                <div v-for="(movie, index) in forRent" :key="index" class="card">
+                                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path"
                                         class="card-img-top trailer-image" alt="..." data-bs-toggle="modal"
                                         :data-bs-target="'#exampleModal' + index" />
 
@@ -575,8 +680,12 @@ export default {
                                     </div>
 
                                     <div class="card-body">
-                                        <h2 class="card-text text-center"><a href="#">The Color Purple</a></h2>
-                                        <h3 class="text-center">"One of the Best Films of the Year"</h3>
+                                        <h2 class="card-text text-center">
+                                            <router-link :to="'movie/view/' + movie.id">
+                                                {{ movie.original_title }}
+                                            </router-link>
+                                        </h2>
+                                        <!-- <h3 class="text-center">"One of the Best Films of the Year"</h3> -->
                                     </div>
 
                                     <!-- Modal -->
@@ -645,9 +754,9 @@ export default {
 
                                 <div class="card-body">
                                     <h2>
-                                        <a href="#">
+                                        <router-link :to="'movie/view/' + movie.id">
                                             {{ movie.original_title }}
-                                        </a>
+                                        </router-link>
                                     </h2>
                                     <span>{{ movie.release_date }}</span>
 
@@ -671,9 +780,9 @@ export default {
 
                                     <div class="card-body">
                                         <h2>
-                                            <a href="#">
+                                            <router-link :to="'movie/view/' + movie.id">
                                                 {{ movie.original_title }}
-                                            </a>
+                                            </router-link>
                                         </h2>
                                         <span>{{ movie.release_date }}</span>
 
@@ -697,9 +806,9 @@ export default {
 
                                     <div class="card-body">
                                         <h2>
-                                            <a href="#">
+                                            <router-link :to="'movie/view/' + movie.id">
                                                 {{ movie.original_title }}
-                                            </a>
+                                            </router-link>
                                         </h2>
                                         <span>{{ movie.release_date }}</span>
 
@@ -723,9 +832,9 @@ export default {
 
                                     <div class="card-body">
                                         <h2>
-                                            <a href="#">
+                                            <router-link :to="'movie/view/' + movie.id">
                                                 {{ movie.original_title }}
-                                            </a>
+                                            </router-link>
                                         </h2>
                                         <span>{{ movie.release_date }}</span>
 
@@ -778,9 +887,9 @@ export default {
 
                                 <div class="card-body">
                                     <h2>
-                                        <a href="#">
+                                        <router-link :to="'movie/view/' + movie.id">
                                             {{ movie.original_title }}
-                                        </a>
+                                        </router-link>
                                     </h2>
                                     <span>{{ movie.release_date }}</span>
 
@@ -805,9 +914,9 @@ export default {
 
                                 <div class="card-body">
                                     <h2>
-                                        <a href="#">
+                                        <router-link :to="'movie/view/' + movie.id">
                                             {{ movie.original_title }}
-                                        </a>
+                                        </router-link>
                                     </h2>
                                     <span>{{ movie.release_date }}</span>
 
@@ -873,6 +982,5 @@ export default {
         </div>
 
     </section>
-
 </template>
 
