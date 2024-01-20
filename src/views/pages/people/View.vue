@@ -417,7 +417,7 @@ export default {
             axios.request(options).then((response) => {
                 this.person = response.data
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
             });
 
         },
@@ -439,7 +439,7 @@ export default {
                 this.knowForMovies = response.data?.cast
                 this.slicedMovies = this.knowForMovies.slice(0, 10);
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
             });
 
         },
@@ -460,7 +460,7 @@ export default {
             axios.request(options).then((response) => {
                 this.personImages = response.data?.profiles
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
 
         }

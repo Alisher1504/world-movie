@@ -34,7 +34,7 @@ export default {
 
                 this.peoplemove = response.data?.results
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
 
         }

@@ -564,7 +564,8 @@
 
                         <div class="movie-image">
 
-                            <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + movieGetById.poster_path" alt="">
+                            <img v-if="movieGetById.poster_path" loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + movieGetById.poster_path" alt="">
+                            <img v-else loading="lazy" style="object-fit: contain;" src="../../../../public/images/default.webp" alt="">
 
                         </div>
 
@@ -671,8 +672,9 @@
                             <div class="card" v-for="person in castpersons.cast">
 
                                 <div class="card-body">
-                                    <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + person.profile_path"
+                                    <img v-if="person.profile_path" loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + person.profile_path"
                                         alt="">
+                                        <img v-else loading="lazy" style="object-fit: contain;" src="../../../../public/images/default.webp" alt="">
                                 </div>
                                 <div class="card-footer">
                                     <router-link :to="'/person/view/' + person.id">{{ person.original_name }}</router-link>
@@ -824,9 +826,9 @@
 
                                     <div v-for="image in movieImages.slice(0, 20)" class="media-img-card">
 
-                                        <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + image.file_path"
+                                        <img v-if="image.file_path" loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + image.file_path"
                                             alt="">
-
+                                            <img v-else loading="lazy" style="object-fit: contain;" src="../../../../public/images/default.webp" alt="">
                                     </div>
 
                                 </div>
@@ -930,8 +932,9 @@
 
                             <div v-for="recomend in recomendvideo" class="card">
                                 <div class="card-body">
-                                    <img loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + recomend.backdrop_path"
+                                    <img v-if="recomend.backdrop_path" loading="lazy" :src="'https://image.tmdb.org/t/p/w500/' + recomend.backdrop_path"
                                         alt="">
+                                        <img v-else loading="lazy" style="object-fit: contain;" src="../../../../public/images/default.webp" alt="">
                                 </div>
                                 <div class="card-footer">
                                     <router-link :to="'/movie/view/' + recomend.id">{{ recomend.original_title.slice(0, 15)
@@ -1075,9 +1078,9 @@ export default {
             axios.request(options).then((response) => {
                 this.movieGetById = response.data
                 this.findCanvasResultGetById = this.movieGetById.vote_average
-                console.log(this.findCanvasResultGetById);
+                // console.log(this.findCanvasResultGetById);
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
 
         },
@@ -1094,7 +1097,7 @@ export default {
             axios.request(options).then((response) => {
                 this.keywordstomovie = response.data
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
         },
         casts() {
@@ -1110,7 +1113,7 @@ export default {
             axios.request(options).then((response) => {
                 this.castpersons = response.data
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
         },
         reviews() {
@@ -1127,7 +1130,7 @@ export default {
             axios.request(options).then((response) => {
                 this.reviewsComment = response.data.results
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
 
         },
@@ -1145,7 +1148,7 @@ export default {
             axios.request(options).then((response) => {
                 this.reviewsCommentdiscussions = response.data.results
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
 
         },
@@ -1163,7 +1166,7 @@ export default {
             axios.request(options).then((response) => {
                 this.movieImages = response.data.backdrops
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
 
         },
@@ -1181,7 +1184,7 @@ export default {
             axios.request(options).then((response) => {
                 this.movieVideos = response.data.results
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
 
         },
@@ -1198,9 +1201,8 @@ export default {
 
             axios.request(options).then((response) => {
                 this.recomendvideo = response.data.results
-                console.log(this.recomendvideo);
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
 
         },
@@ -1213,7 +1215,7 @@ export default {
             var width = canvas.width;
             // canvas.height = width + 50;
             var height = canvas.height;
-            let percent = this.findCanvasResultGetById;
+            let percent = 59;
 
             var counter = 0;
 

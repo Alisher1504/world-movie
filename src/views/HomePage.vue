@@ -75,7 +75,7 @@ export default {
             axios.request(option).then((response) => {
                 this.populationMovie = response.data?.results;
             }).catch((error) => {
-                console.log(error)
+                // console.log(error)
             })
 
         },
@@ -96,7 +96,7 @@ export default {
             axios.request(option).then((response) => {
                 this.streaming = response.data?.results
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
 
         },
@@ -117,7 +117,7 @@ export default {
             axios.request(option).then((response) => {
                 this.onTv = response.data?.results
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
 
         },
@@ -138,7 +138,7 @@ export default {
             axios.request(option).then((response) => {
                 this.forRent = response.data?.results
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
 
         },
@@ -159,7 +159,7 @@ export default {
             axios.request(option).then((response) => {
                 this.inTheater = response.data?.results
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
 
         },
@@ -180,7 +180,7 @@ export default {
             axios.request(option).then((response) => {
                 this.trending = response.data?.results
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
 
         },
@@ -201,7 +201,7 @@ export default {
             axios.request(option).then((response) => {
                 this.trendingTv = response.data?.results
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
 
         },
@@ -222,7 +222,7 @@ export default {
             axios.request(option).then((response) => {
                 this.videoMoviePopular1 = response.data?.results
             }).catch((error) => {
-                console.log(error);
+                // console.log(error);
             })
 
         },
@@ -243,7 +243,7 @@ export default {
         //     axios.request(option).then((response) => {
         //         this.videoMoviePopulars2 = response.data?.results
         //     }).catch((error) => {
-        //         console.log(error);
+         //       console.log(error);
         //     })
 
         // },
@@ -264,7 +264,7 @@ export default {
         //     axios.request(option).then((response) => {
         //         this.videoMoviePopulars3 = response.data?.results
         //     }).catch((error) => {
-        //         console.log(error);
+        //        console.log(error);
         //     })
 
         // },
@@ -285,7 +285,7 @@ export default {
         //     axios.request(option).then((response) => {
         //         this.videoMoviePopulars4 = response.data?.results
         //     }).catch((error) => {
-        //         console.log(error);
+        //        console.log(error);
         //     })
 
         // },
@@ -306,7 +306,7 @@ export default {
         //     axios.request(option).then((response) => {
         //         this.videoMoviePopulars5 = response.data?.results
         //     }).catch((error) => {
-        //         console.log(error);
+        //        console.log(error);
         //     })
 
         // },
@@ -443,7 +443,7 @@ export default {
 
                             <div class="card-content">
 
-                                <MovieModal v-for="(movie, index) in forRent" :key="index" :movie="movie" />
+                                <MovieModal v-for="(movie, index) in forRent" :movie="movie" />
 
                             </div>
 
@@ -454,7 +454,7 @@ export default {
 
                             <div class="card-content">
 
-                                <MovieModal v-for="(movie, index) in populationmove" :key="index" :movie="movie" />
+                                <MovieModal v-for="(movie, index) in populationmove" :movie="movie" />
 
 
                             </div>
@@ -466,7 +466,7 @@ export default {
 
                             <div class="card-content">
 
-                                <MovieModal v-for="(movie, index) in populationMovie" :key="index" :movie="movie" />
+                                <MovieModal v-for="(movie, index) in populationMovie" :movie="movie" />
 
 
                             </div>
@@ -478,7 +478,7 @@ export default {
 
                             <div class="card-content">
 
-                                <MovieModal v-for="(movie, index) in streaming" :key="index" :movie="movie" />
+                                <MovieModal v-for="(movie, index) in streaming" :movie="movie" />
 
                             </div>
 
@@ -489,7 +489,7 @@ export default {
 
                             <div class="card-content">
 
-                                <MovieModal v-for="(movie, index) in videoMoviePopular1" :key="index" :movie="movie" />
+                                <MovieModal v-for="(movie, index) in videoMoviePopular1" :movie="movie" />
 
                             </div>
 
