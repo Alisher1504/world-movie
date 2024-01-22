@@ -100,6 +100,7 @@
     display: flex;
     gap: 15px;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .header-info h3 {
@@ -661,7 +662,7 @@
 
             <div class="row">
 
-                <div class="col-9">
+                <div class="col-lg-9 col-12">
 
                     <h1 class="title-content">Top Billed Cast</h1>
 
@@ -949,7 +950,7 @@
                     </div>
 
                 </div>
-                <div class="col-3">
+                <div class="col-lg-3 col-12">
 
                     <div class="icons">
 

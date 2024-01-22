@@ -12,7 +12,7 @@
 
         <div class="container">
 
-            <div v-for="item in movies" class="card my-3">
+            <div v-if="movies.length > 0" v-for="item in movies" class="card my-3">
                 <div class="row g-0">
                     <div class="col-md-1">
                         <img v-if="item.poster_path" loading="lazy"
@@ -23,13 +23,17 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold"><router-link :to="'/movie/view/' + item.id">Card title</router-link></h5>
+                            <h5 class="card-title fw-bold"><router-link :to="'/movie/view/' + item.id">{{ item.title }}</router-link></h5>
                             <p class="card-text"><small class="text-body-secondary fw-bold">Last updated {{ item.release_date }}</small></p>
                             <p class="card-text">{{ item.title }}</p>
 
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div v-else class="mt-3">
+                <h3 class="fw-bold text-center">Movies not found</h3>
             </div>
 
         </div>
